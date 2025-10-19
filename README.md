@@ -3,7 +3,7 @@
 ## Equipo de desarrollo
 
 - Robles Dario
-- 
+- Cristian Signorini
 - 
 - 
 - 
