@@ -7,8 +7,8 @@
 - Analía Rossotti
 - Daiana Diaz
 - Diego Goso
-- 
-- 
+- Flor Saharrea
+- Augusto Moran
 
 ## Capturas
 
