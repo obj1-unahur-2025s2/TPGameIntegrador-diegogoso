@@ -6,7 +6,7 @@
 - Cristian Signorini
 - Analía Rossotti
 - Daiana Diaz
-- 
+- Diego Goso
 - 
 - 
 
