@@ -1,5 +1,10 @@
 import direcciones.*
 
+object ninguno {
+  method lanzar(jugador) {
+    
+  }
+}
 object curacion {
   method lanzar(jugador) {
     const mana = 5
@@ -9,15 +14,18 @@ object curacion {
   method danio() = 0
 }
 object fuego {
-  const image = "bolaDeFuego.png"
-  var property position = null
+  var image = "bolaDeFuego.png"
+  var property position = game.at(16,16)
   method lanzar(jugador) {
     self.position(jugador.position())
     var direccionALanzar = jugador.ultimaDireccion()
-    while (not self.estaEnBorde()){
-        self.moverseHacia(direccionALanzar)
-    }
+    (1..16).forEach({m => self.moverseHacia(direccionALanzar)})
+      self.eliminarBolaDeFuego()
+    
   }
+   method eliminarBolaDeFuego(){
+    image = ""
+   }
    method moverseHacia(direccion) {
     if (direccion == norte.direcc()) {
         self.position(self.position().up(1))

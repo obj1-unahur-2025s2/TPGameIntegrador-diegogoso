@@ -1,12 +1,12 @@
 import direcciones.*
-
-class Gerrero {
-  var property image
+import hechizos.*
+object guerrero {
+  var property image = "guerreroRPC.png"
   method alternarImagen() {
-   if (image == "guerrero1.png"){
-    image = "guerrero2.png"
+   if (image == "guerreroRPC.png"){
+    image = "guerreroRPA.png"
    }else{
-    image = "guerrero1.png"
+    image = "guerreroRPC.png"
    }
   }
   var property position = new Position (x=4, y=7)//game.at(4,7) lo mismo  
@@ -42,20 +42,26 @@ class Gerrero {
   var magia = 5
   method magia() = magia
 
-  var arma = espadaDeDosManos
+ // var arma = espadaDeDosManos
 
-  const armadura = armaduraPesada
+ // const armadura = armaduraPesada
 
   method echizos() = curacion
-
+  
+  method lanzarHechizo() {
+    
+  }
+       method recibirAtaque(hechizo) {
+  self.sacarVida(hechizo.danio())
+ }
 }
-class Arquero {
-  var property image
+object arquero {
+  var property image = "arqueroRPC.png"
   method alternarImagen() {
-   if (image == "arquero1.png"){
-    image = "arquero2.png"
+   if (image == "arqueroRPC.png"){
+    image = "arqueroRPA.png"
    }else{
-    image = "arquero1.png"
+    image = "arqueroRPC.png"
    }
   }
   var property position = new Position (x=5, y=7)//game.at(4,7) lo mismo  
@@ -76,9 +82,7 @@ class Arquero {
         self.position(self.position().down(1))
          ultimaDireccion = sur
     } 
-     method recibirAtaque(hechizo) {
-  self.sacarVida(hechizo.danio())
- }
+
   }
   var vida = 60
   method vidaMaxima() = 60
@@ -94,25 +98,26 @@ class Arquero {
   var magia = 5
   method magia() = magia
 
-  var arma = arco
+ // var arma = arco
 
   var cantidadDeFlechas = 30
 
-  const armadura = armaduraDeCuero
+  //const armadura = armaduraDeCuero
 
-  method echizos() = #{dashes, teletransporte}
+ // method echizos() = #{dashes, teletransporte}
+  
 
  method recibirAtaque(hechizo) {
   self.sacarVida(hechizo.danio())
  }
 }
-class Barbaro {
-  var property image
+object barbaro {
+  var property image = "barbaroRPC.png"
   method alternarImagen() {
-   if (image == "barbaro1.png"){
-    image = "barbaro2.png"
+   if (image == "barbaroRPC.png"){
+    image = "barbaroRPA.png"
    }else{
-    image = "barbaro1.png"
+    image = "barbaroRPC.png"
    }
   }
   var property position = new Position (x=6, y=7)//game.at(4,7) lo mismo  
@@ -149,9 +154,9 @@ class Barbaro {
   method darMana(cantidad) = (mana + cantidad).min(self.manaMaxima())
   method sacarMana(cantidad) = (mana - cantidad).max(0)
 
-  var arma = hacha
+ // var arma = hacha
 
-  var armadura = nignuna
+  //var armadura = nignuna
 
   method echizos() = ninguno
 
@@ -160,13 +165,13 @@ class Barbaro {
  }
 }
 
-class Mago  {
-  var property image
+object mago  {
+  var property image = "magoRPC.png"
   method alternarImagen() {
-   if (image == "mago1.png"){
-    image = "mago2.png"
+   if (image == "magoRPC.png"){
+    image = "magoRPA.png"
    }else{
-    image = "mago1.png"
+    image = "magoRPC.png"
    }
   }
   var property position = new Position (x=7, y=7)//game.at(4,7) lo mismo  
@@ -203,11 +208,11 @@ class Mago  {
   var magia = 30
   method magia() = magia
 
-  var arma = baculo
+//  var arma = baculo
 
-  var armadura = #{tunica, sombreroDeMago}
+ // var armadura = #{tunica, sombreroDeMago}
 
-  method echizos() = #{curacion, fuego, agua, teletransporte, dash, fortaleza}
+//  method echizos() = #{curacion, fuego, agua, teletransporte, dash, fortaleza}
 
  method recibirAtaque(hechizo) {
   self.sacarVida(hechizo.danio())
