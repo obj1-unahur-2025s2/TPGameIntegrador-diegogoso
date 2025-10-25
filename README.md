@@ -6,7 +6,7 @@
 - Cristian Signorini
 - Analía Rossotti
 - Daiana Diaz
-- 
+- Augusto Moran
 - 
 - 
 
@@ -27,11 +27,11 @@ Juego de rol sobre un cazador, habitante de un pueblo cercano a un lago. El obje
 
 ## Hechizos:
     - Curacion: Recupera 10 + los puntos de magia del usuario de puntos de vida. Consume 5 puntos de maná.
-    - Fuego: Hace un daño de 3 multiplicado por los puntos de magia del usuario a un unico objetivo. Consume 10 puntos de maná.
+    - Fuego: Hace un daño de 3 multiplicado por los puntos de magia del usuario a un unico objetivo que este en la direccion hacia donde mire el ejecutor. Consume 10 puntos de maná.
     - Agua: Hace un daño de 1.5 multiplicado por los puntos de magia del usuario a varios objetivosa. Consume 10 puntos de maná.
     - Teletransporte: Teletransporta al jugador a un lugar de tu eleccion dentro de un rango determinado. Consume 20 puntos de maná.
     - Dash: Hace que el jugador se mueva rapidamente una corta distancia en la direccion a la que esta mirando. Consume 5 puntos de maná.
-    - Armadura: Endurece la tunica del mago, aumentando la armadura que otorga en 20 puntos. Consume 10 puntos de maná.
+    - Fortaleza: Endurece la tunica del mago, aumentando la armadura que otorga en 20 puntos. Consume 10 puntos de maná.
 
 ## Mapas:
     - Pueblo: Zona inicial, sin enemigos, el jugador recibe misiones en esta zona.

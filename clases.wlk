@@ -1,9 +1,215 @@
-object pepita {
-  var energy = 100
+import direcciones.*
 
-  method energy() = energy
-
-  method fly(minutes) {
-    energy = energy - minutes * 3
+class Gerrero {
+  var property image
+  method alternarImagen() {
+   if (image == "guerrero1.png"){
+    image = "guerrero2.png"
+   }else{
+    image = "guerrero1.png"
+   }
   }
+  var property position = new Position (x=4, y=7)//game.at(4,7) lo mismo  
+  var ultimaDireccion = norte
+  method ultimaDireccion() = ultimaDireccion
+  method moverseHacia(direccion) {
+    self.alternarImagen()
+    if (direccion == norte.direcc()) {
+        self.position(self.position().up(1))
+         ultimaDireccion=norte
+    } else if (direccion == oeste.direcc()) {
+        self.position(self.position().left(1))
+         ultimaDireccion = oeste
+    } else if (direccion == este.direcc()) {
+        self.position(self.position().right(1))
+         ultimaDireccion = este
+    } else {
+        self.position(self.position().down(1))
+         ultimaDireccion = sur
+    } 
+  }
+  var vida = 80
+  method vidaMaxima() = 80
+  method darVida(cantidad) = (vida + cantidad).min(self.vidaMaxima())
+  method sacarVida(cantidad) = (vida - cantidad).max(0)
+ 
+  var fuerza = 20
+
+  var mana = 10
+  method manaMaxima() = 10
+  method darMana(cantidad) = (mana + cantidad).min(self.manaMaxima())
+  method sacarMana(cantidad) = (mana - cantidad).max(0)
+  var magia = 5
+  method magia() = magia
+
+  var arma = espadaDeDosManos
+
+  const armadura = armaduraPesada
+
+  method echizos() = curacion
+
+}
+class Arquero {
+  var property image
+  method alternarImagen() {
+   if (image == "arquero1.png"){
+    image = "arquero2.png"
+   }else{
+    image = "arquero1.png"
+   }
+  }
+  var property position = new Position (x=5, y=7)//game.at(4,7) lo mismo  
+ var ultimaDireccion = norte
+  method ultimaDireccion() = ultimaDireccion
+  method moverseHacia(direccion) {
+    self.alternarImagen()
+    if (direccion == norte.direcc()) {
+        self.position(self.position().up(1))
+         ultimaDireccion=norte
+    } else if (direccion == oeste.direcc()) {
+        self.position(self.position().left(1))
+         ultimaDireccion = oeste
+    } else if (direccion == este.direcc()) {
+        self.position(self.position().right(1))
+         ultimaDireccion = este
+    } else {
+        self.position(self.position().down(1))
+         ultimaDireccion = sur
+    } 
+     method recibirAtaque(hechizo) {
+  self.sacarVida(hechizo.danio())
+ }
+  }
+  var vida = 60
+  method vidaMaxima() = 60
+  method darVida(cantidad) = (vida + cantidad).min(self.vidaMaxima())
+  method sacarVida(cantidad) = (vida - cantidad).max(0)
+  
+  var fuerza = 15
+
+  var mana = 20
+  method manaMaxima() = 20
+  method darMana(cantidad) = (mana + cantidad).min(self.manaMaxima())
+  method sacarMana(cantidad) = (mana - cantidad).max(0)
+  var magia = 5
+  method magia() = magia
+
+  var arma = arco
+
+  var cantidadDeFlechas = 30
+
+  const armadura = armaduraDeCuero
+
+  method echizos() = #{dashes, teletransporte}
+
+ method recibirAtaque(hechizo) {
+  self.sacarVida(hechizo.danio())
+ }
+}
+class Barbaro {
+  var property image
+  method alternarImagen() {
+   if (image == "barbaro1.png"){
+    image = "barbaro2.png"
+   }else{
+    image = "barbaro1.png"
+   }
+  }
+  var property position = new Position (x=6, y=7)//game.at(4,7) lo mismo  
+  var ultimaDireccion = norte
+  method ultimaDireccion() = ultimaDireccion
+  method moverseHacia(direccion) {
+    self.alternarImagen()
+    if (direccion == norte.direcc()) {
+        self.position(self.position().up(1))
+         ultimaDireccion=norte
+    } else if (direccion == oeste.direcc()) {
+        self.position(self.position().left(1))
+         ultimaDireccion = oeste
+    } else if (direccion == este.direcc()) {
+        self.position(self.position().right(1))
+         ultimaDireccion = este
+    } else {
+        self.position(self.position().down(1))
+         ultimaDireccion = sur
+    } 
+  }
+  var vida = 150
+  method vidaMaxima() = 150
+  method darVida(cantidad) = (vida + cantidad).min(self.vidaMaxima())
+  method sacarVida(cantidad) = (vida - cantidad).max(0)
+  
+  var fuerza = 30
+
+  var magia = 0
+  method magia() = magia
+
+  var mana = 0
+  method manaMaxima() = 0
+  method darMana(cantidad) = (mana + cantidad).min(self.manaMaxima())
+  method sacarMana(cantidad) = (mana - cantidad).max(0)
+
+  var arma = hacha
+
+  var armadura = nignuna
+
+  method echizos() = ninguno
+
+   method recibirAtaque(hechizo) {
+  self.sacarVida(hechizo.danio())
+ }
+}
+
+class Mago  {
+  var property image
+  method alternarImagen() {
+   if (image == "mago1.png"){
+    image = "mago2.png"
+   }else{
+    image = "mago1.png"
+   }
+  }
+  var property position = new Position (x=7, y=7)//game.at(4,7) lo mismo  
+   var ultimaDireccion = norte
+  method ultimaDireccion() = ultimaDireccion
+  method moverseHacia(direccion) {
+    self.alternarImagen()
+    if (direccion == norte.direcc()) {
+        self.position(self.position().up(1))
+         ultimaDireccion=norte
+    } else if (direccion == oeste.direcc()) {
+        self.position(self.position().left(1))
+         ultimaDireccion = oeste
+    } else if (direccion == este.direcc()) {
+        self.position(self.position().right(1))
+         ultimaDireccion = este
+    } else {
+        self.position(self.position().down(1))
+         ultimaDireccion = sur
+    } 
+  }
+  var vida = 60
+  method vidaMaxima() = 60
+  method darVida(cantidad) = (vida + cantidad).min(self.vidaMaxima())
+  method sacarVida(cantidad) = (vida - cantidad).max(0)
+  
+  var fuerza = 5
+
+  var mana = 50
+  method manaMaxima() = 50
+  method darMana(cantidad) = (mana + cantidad).min(self.manaMaxima())
+  method sacarMana(cantidad) = (mana - cantidad).max(0)
+
+  var magia = 30
+  method magia() = magia
+
+  var arma = baculo
+
+  var armadura = #{tunica, sombreroDeMago}
+
+  method echizos() = #{curacion, fuego, agua, teletransporte, dash, fortaleza}
+
+ method recibirAtaque(hechizo) {
+  self.sacarVida(hechizo.danio())
+ }
 }
