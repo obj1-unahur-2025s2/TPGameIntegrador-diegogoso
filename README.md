@@ -6,9 +6,15 @@
 - Cristian Signorini
 - Analía Rossotti
 - Daiana Diaz
+<<<<<<< HEAD
 - Augusto Moran
 - 
 - 
+=======
+- Diego Goso
+- Flor Saharrea
+- Augusto Moran
+>>>>>>> 61e33016b522c220b022dcc8c16cb82e3ca720ac
 
 ## Capturas
 
