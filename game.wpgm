@@ -1,0 +1,31 @@
+import wollok.game.*
+import clases.*
+import hechizos.*
+import direcciones.*
+import juego.*
+
+program redWaterMystery {
+  juego.iniciarMenu()
+  
+  const personaje = juego.jugador()
+
+  keyboard.w().onPressDo({
+    personaje.moverseHacia(norte)
+  })
+
+  keyboard.s().onPressDo({
+    personaje.moverseHacia(sur)
+  })
+
+  keyboard.a().onPressDo({
+      personaje.moverseHacia(oeste)
+  })
+
+  keyboard.d().onPressDo({
+      personaje.moverseHacia(este)
+  })
+
+  game.onCollideDo(fuego, {algo => algo.recibirAtaque(fuego)})
+  
+  game.start()
+}
