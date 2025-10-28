@@ -8,7 +8,7 @@ import enemigos.*
 program redWaterMystery {
   juego.iniciarMenu()
   
-  const personaje = juego.jugador()
+  var personaje = juego.jugador()
 
   keyboard.w().onPressDo({
     personaje.moverseHacia(norte)
