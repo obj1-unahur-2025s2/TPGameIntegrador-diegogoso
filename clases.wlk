@@ -3,7 +3,7 @@ import direcciones.*
 import hechizos.*
 //import wollok.game.VisualCharacter
 
-class Jugador inherits VisualCharacter {
+class Jugador {
     var property image
     var property position
     var imageBase
@@ -21,12 +21,16 @@ class Jugador inherits VisualCharacter {
             image = imageBase
         }
     }
+    // VERIFICAR EL MOVIMIENTO QUE NO SALGA DE PANTALLA
 
     method moverseHacia(direccion) {
+        
         self.alternarImagen()
         direccion.mover(self)
         direccionActual = direccion
     }
+
+
 
     method ultimaDireccion() = direccionActual
 
@@ -77,4 +81,3 @@ class Mago inherits Jugador {
      // Podés redefinir hechizos si querés:
      // method hechizos() = #{curacion, fuego, agua, teletransporte, dash, fortaleza}
 }
-     
