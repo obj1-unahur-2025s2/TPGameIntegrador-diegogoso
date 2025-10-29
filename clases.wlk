@@ -79,6 +79,7 @@ class Barbaro inherits Jugador {
 }
 
 class Mago inherits Jugador {
+    
      override method vidaMaxima() = 60
      override method manaMaxima() = 50
      override method hechizos() = #{}
