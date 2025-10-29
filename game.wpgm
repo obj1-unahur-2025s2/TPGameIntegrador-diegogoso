@@ -8,30 +8,6 @@ import enemigos.*
 program redWaterMystery {
     juego.iniciarMenu()
 
-    keyboard.w().onPressDo({
-        if (juego.jugador() != null) {
-            juego.jugador().moverseHacia(norte)
-        }
-    })
-
-    keyboard.s().onPressDo({
-        if (juego.jugador() != null) {
-            juego.jugador().moverseHacia(sur)
-        }
-    })
-
-    keyboard.a().onPressDo({
-        if (juego.jugador() != null) {
-            juego.jugador().moverseHacia(oeste)
-        }
-    })
-
-    keyboard.d().onPressDo({
-        if (juego.jugador() != null) {
-            juego.jugador().moverseHacia(este)
-        }
-    })
-
     game.onCollideDo(fuego, {algo => algo.recibirAtaque(fuego)})
 
     game.start()

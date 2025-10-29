@@ -1,9 +1,10 @@
 import wollok.game.*
 import pantallas.*
 import clases.*
+import direcciones.*
 
 object juego {
-    var jugador = null
+    var jugador = arquero
 
     method jugador() = jugador
 
@@ -11,57 +12,50 @@ object juego {
         jugador = nuevoJugador
     }
 
-    method crearGuerrero() {
-        jugador = new Guerrero(
-            imageBase = "guerreroRPC.png",
-            imageAlt = "guerreroRPA.png",
-            image = "guerreroRPC.png",
-            vida = 80,
-            fuerza = 20,
-            mana = 10,
-            magia = 5,
-            position = game.center()
-        )
-    }
+    const guerrero = new Guerrero(
+        imageBase = "guerreroRPC.png",
+        imageAlt = "guerreroRPA.png",
+        image = "guerreroRPC.png",
+        vida = 80,
+        fuerza = 20,
+        mana = 10,
+        magia = 5,
+        position = game.center()
+    )
 
-    method crearArquero() {
-        jugador = new Arquero(
-            imageBase = "arqueroRPC.png",
-            imageAlt = "arqueroRPA.png",
-            image = "arqueroRPC.png",
-            vida = 60,
-            fuerza = 15,
-            mana = 20,
-            magia = 15,
-            position = game.center()
-        )
-    }
+    const arquero = new Arquero(
+        imageBase = "arqueroRPC.png",
+        imageAlt = "arqueroRPA.png",
+        image = "arqueroRPC.png",
+        vida = 60,
+        fuerza = 15,
+        mana = 20,
+        magia = 15,
+        position = game.center()
+    )
 
-    method crearBarbaro() {
-        jugador = new Barbaro(
-            imageBase = "barbaroRPC.png",
-            imageAlt = "barbaroRPA.png",
-            image = "barbaroRPC.png",
-            vida = 150,
-            fuerza = 30,
-            mana = 0,
-            magia = 0,
-            position = game.center()
-        )
-    }
+    
+    const barbaro = new Barbaro(
+        imageBase = "barbaroRPC.png",
+        imageAlt = "barbaroRPA.png",
+        image = "barbaroRPC.png",
+        vida = 150,
+        fuerza = 30,
+        mana = 0,
+        magia = 0,
+        position = game.center()
+    )
 
-    method crearMago() {
-        jugador = new Mago(
-            imageBase = "magoRPC.png",
-            imageAlt = "magoRPA.png",
-            image = "magoRPC.png",
-            vida = 60,
-            fuerza = 5,
-            mana = 50,
-            magia = 30,
-            position = game.center()
-        )
-    }
+    const mago = new Mago(
+        imageBase = "magoRPC.png",
+        imageAlt = "magoRPA.png",
+        image = "magoRPC.png",
+        vida = 60,
+        fuerza = 5,
+        mana = 50,
+        magia = 30,
+        position = game.center()
+    )
 
     method iniciarMenu() {
         game.title("gameGeneral")
@@ -78,28 +72,28 @@ object juego {
 
         keyboard.u().onPressDo({
             if (pantallas.seleccion().hasVisual()) {
-                self.crearArquero()
+                self.cambiarJugador(arquero)
                 self.iniciar()
             }
         })
 
         keyboard.i().onPressDo({
             if (pantallas.seleccion().hasVisual()) {
-                self.crearBarbaro()
+                self.cambiarJugador(barbaro)
                 self.iniciar()
             }
         })
 
         keyboard.o().onPressDo({
             if (pantallas.seleccion().hasVisual()) {
-                self.crearGuerrero()
+                self.cambiarJugador(guerrero)
                 self.iniciar()
             }
         })
 
         keyboard.p().onPressDo({
             if (pantallas.seleccion().hasVisual()) {
-                self.crearMago()
+                self.cambiarJugador(mago)
                 self.iniciar()
             }
         })
@@ -109,5 +103,21 @@ object juego {
         game.ground("fondo.png")
         pantallas.seleccion().removerVisual()
         game.addVisualCharacter(jugador)
+
+        keyboard.w().onPressDo({
+            jugador.moverseHacia(norte)
+        })
+
+        keyboard.s().onPressDo({
+            jugador.moverseHacia(sur)
+        })
+
+        keyboard.a().onPressDo({
+            jugador.moverseHacia(oeste)
+        })
+
+        keyboard.d().onPressDo({
+            jugador.moverseHacia(este)
+        })
     }
 }
