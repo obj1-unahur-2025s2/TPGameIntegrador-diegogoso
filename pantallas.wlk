@@ -4,6 +4,7 @@ import juego.*
 object pantallas {
 	const property inicio = new Fondo(position=game.at(0,0), img="pantallaInicio.png")
 	const property seleccion = new Fondo(position=game.at(0,0), img="seleccionDePersonajes.png")
+	const property juego = new Fondo(position=game.at(0,0), img="fondoDelJuego.png")
 }
 
 class Visual {

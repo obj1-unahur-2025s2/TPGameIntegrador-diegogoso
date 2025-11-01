@@ -9,6 +9,7 @@ object juego {
     var jugador = arquero
     
     const enemigos = #{arania, arania2, arania3}
+    
     method jugador() = jugador
 
     method cambiarJugador(nuevoJugador) {
@@ -16,18 +17,19 @@ object juego {
     }
 
     const arania = new Enemigo(
-       position = game.at (12,13),
-        image= "arania.png",
+        position = game.at (12,13),
+        image = "arania.png",
         vida = 5
     )
-        const arania2 = new Enemigo(
-       position = game.at (13,13),
-        image= "arania.png",
+
+    const arania2 = new Enemigo(
+        position = game.at (13,13),
+        image = "arania.png",
         vida = 5
     )
         const arania3 = new Enemigo(
-       position = game.at (14,13),
-        image= "arania.png",
+        position = game.at (14,13),
+        image = "arania.png",
         vida = 5
     )
 
@@ -119,8 +121,8 @@ object juego {
     }
 
     method iniciar() {
-        game.ground("fondo.png")
         pantallas.seleccion().removerVisual()
+        pantallas.juego().agregarVisual()
         game.addVisualCharacter(jugador)
 
         keyboard.w().onPressDo({
@@ -144,10 +146,10 @@ object juego {
             fuego.lanzar(jugador)  
         })
 
-      enemigos.forEach({e => 
-      game.addVisual(e)
-        game.onTick(2000, "mueve aleatoriamente", {e.moverAleatoriamente() })
-      })
+        enemigos.forEach({e => 
+        game.addVisual(e)
+            game.onTick(2000, "mueve aleatoriamente", {e.moverAleatoriamente() })
+        })
         
       
     }

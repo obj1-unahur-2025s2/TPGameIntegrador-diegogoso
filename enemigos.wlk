@@ -7,12 +7,14 @@ class Enemigo {
   var property position
   var property image
   var vida
-method moverAleatoriamente() {
-    const direcciones = [norte, oeste, sur, este]
-    const direccionAleatoria = direcciones.randomized().first()
 
-    direccionAleatoria.mover(self)
-}
+  method moverAleatoriamente() {
+      const direcciones = [norte, oeste, sur, este]
+      
+      const direccionAleatoria = direcciones.randomized().first()
+
+      direccionAleatoria.mover(self)
+  }
 
 
   method recibirAtaque(hechizo) {
