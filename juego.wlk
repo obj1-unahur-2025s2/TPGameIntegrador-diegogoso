@@ -22,12 +22,15 @@ object juego {
         }
     }
     method pasarDeNivel() {
-        pantallas.juego().removerVisual()
-        pantallas.nivel2().agregarVisual()
+    game.stop()  // Pausa el juego 3 segundos maso para que se vea el mensaje
 
-        pantallas.mensajeNivel2().agregarVisual()
-        game.schedule(2000, {
+    pantallas.juego().removerVisual()
+    pantallas.nivel2().agregarVisual()
+    pantallas.mensajeNivel2().agregarVisual()
+
+    game.schedule(2000, {
         pantallas.mensajeNivel2().removerVisual()
+        game.start()  // Reactiva el juego
     })
     // se puede agregar nuevos enemigos, cambiar el jugador, mostrar mensaje, si quieren
     }*/
