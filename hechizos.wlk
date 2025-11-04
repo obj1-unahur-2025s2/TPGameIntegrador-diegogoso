@@ -7,11 +7,13 @@ class Hechizo {
   var property image = ""
   var property position = game.at(0,0)
 
+  method enfriamiento() = 2000
   method lanzar(jugador)
   method danio(jugador)
   method eliminar() {
     image = ""
   }
+
 }
 class Curacion inherits Hechizo {
   override method lanzar(jugador) {
@@ -20,7 +22,7 @@ class Curacion inherits Hechizo {
     jugador.darVida(jugador.magia())
     jugador.sacarMana(mana)
   }
-
+  override method enfriamiento() = super() + 5000
   override method danio(jugador) = 0
 }
 
@@ -75,7 +77,7 @@ class Agua inherits Hechizo {
   method expandir() {
     // efecto de expansión: reemplazar imagen o cambiar size
   }
-
+  override method enfriamiento() = super() + 6000
   override method danio(jugador) = jugador.sacarVida(1.5 * jugador.magia())
 }
 

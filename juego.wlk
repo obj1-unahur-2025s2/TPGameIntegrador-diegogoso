@@ -67,8 +67,10 @@ object juego {
         pantallas.inicio().agregarVisual()
 
         keyboard.enter().onPressDo({
-            pantallas.inicio().removerVisual()
-            pantallas.seleccion().agregarVisual()
+            if (pantallas.inicio().hasVisual()){
+                pantallas.inicio().removerVisual()
+                pantallas.seleccion().agregarVisual()
+            }
         })
 
         keyboard.u().onPressDo({
@@ -98,6 +100,12 @@ object juego {
                 self.iniciar()
             }
         })
+        keyboard.q().onPressDo({
+            if(not pantallas.inicio().hasVisual()){
+               game.removeVisual(jugador)
+               pantallas.inicio().agregarVisual() 
+            }
+        })
     }
 
     method iniciar() {
@@ -124,6 +132,7 @@ object juego {
         keyboard.j().onPressDo({
             const fuego = new Fuego()
             fuego.lanzar(jugador)  
+            
         })
     }
 }
