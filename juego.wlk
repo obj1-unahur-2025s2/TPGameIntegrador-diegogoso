@@ -17,7 +17,6 @@ object juego {
         jugador = nuevoJugador
     }
 
-<<<<<<< Updated upstream
     method generarEnemigo() {
             if (enemigos.size() < 6) { // máximo 6 enemigos a la vez
                 const enemigo = new Enemigo()
@@ -36,8 +35,6 @@ object juego {
     }
 
 
-=======
->>>>>>> Stashed changes
     /*method verificarPasoDeNivel() { // agregar desde aca hasta la linea 36
        const enemigosVivos = enemigos.filter({e => e.vida > 0})
        
