@@ -1,4 +1,6 @@
 object norte {
+  method nombre() = "norte"
+
   method mover(jugador) {
     if(jugador.position().y() < 14){
       jugador.position(jugador.position().up(1))
@@ -7,6 +9,8 @@ object norte {
 }
 
 object sur {
+  method nombre() = "sur"
+
   method mover(jugador) {
     if(jugador.position().y() > 1){
       jugador.position(jugador.position().down(1))
@@ -15,6 +19,8 @@ object sur {
 }
 
 object este {
+  method nombre() = "este"
+
   method mover(jugador) {
     if(jugador.position().x() < 14){
       jugador.position(jugador.position().right(1))
@@ -23,6 +29,8 @@ object este {
 }
 
 object oeste {
+  method nombre() = "oeste"
+
   method mover(jugador) {
     if(jugador.position().x() > 1){
       jugador.position(jugador.position().left(1))

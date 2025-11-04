@@ -4,29 +4,24 @@ import hechizos.*
 //import wollok.game.VisualCharacter
 
 class Jugador {
+    const nombre
     var property image
     var property position
-    const imageBase
-    const imageAlt
     var magia
     var vida 
     var fuerza
     var mana
-    var direccionActual = norte
+    var direccionActual = este
 
-    method alternarImagen() {
-        if (image == imageBase) {
-            image = imageAlt
-        } else {
-            image = imageBase
-        }
+
+    method alternarImagen(unaDireccion) {
+        image = nombre + unaDireccion.nombre() + ".png"
     }
 
     // VERIFICAR EL MOVIMIENTO QUE NO SALGA DE PANTALLA
 
     method moverseHacia(direccion) {
-        
-        self.alternarImagen()
+        self.alternarImagen(direccion)
         direccion.mover(self)
         direccionActual = direccion
     }

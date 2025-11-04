@@ -9,7 +9,7 @@ object juego {
     var jugador = arquero
     
     const enemigos = #{arania, arania2, arania3}
-    
+
     method jugador() = jugador
 
     method cambiarJugador(nuevoJugador) {
@@ -27,15 +27,15 @@ object juego {
         image = "arania.png",
         vida = 5
     )
-        const arania3 = new Enemigo(
+
+    const arania3 = new Enemigo(
         position = game.at (14,13),
         image = "arania.png",
         vida = 5
     )
 
     const guerrero = new Guerrero(
-        imageBase = "guerreroRPC.png",
-        imageAlt = "guerreroRPA.png",
+        nombre = "guerrero",
         image = "guerreroRPC.png",
         vida = 80,
         fuerza = 20,
@@ -45,8 +45,7 @@ object juego {
     )
 
     const arquero = new Arquero(
-        imageBase = "arqueroRPC.png",
-        imageAlt = "arqueroRPA.png",
+        nombre = "arquero",
         image = "arqueroRPC.png",
         vida = 60,
         fuerza = 15,
@@ -57,8 +56,7 @@ object juego {
 
     
     const barbaro = new Barbaro(
-        imageBase = "barbaroRPC.png",
-        imageAlt = "barbaroRPA.png",
+        nombre = "barbaro",
         image = "barbaroRPC.png",
         vida = 150,
         fuerza = 30,
@@ -68,9 +66,8 @@ object juego {
     )
 
     const mago = new Mago(
-        imageBase = "magoRPC.png",
-        imageAlt = "magoRPA.png",
-        image = "magoRPC.png",
+        nombre = "mago",
+        image = "magoeste.png",
         vida = 60,
         fuerza = 5,
         mana = 50,
