@@ -16,7 +16,11 @@ object juego {
     method cambiarJugador(nuevoJugador) {
         jugador = nuevoJugador
     }
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 25215d2d3e7c6be0a7c8d70cccc6847ccf607347
     method generarEnemigo() {
             if (enemigos.size() < cantidadEnemigosMaxima) { 
                 const enemigo = new Enemigo()
