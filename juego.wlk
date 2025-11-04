@@ -15,6 +15,22 @@ object juego {
     method cambiarJugador(nuevoJugador) {
         jugador = nuevoJugador
     }
+    /*method verificarPasoDeNivel() {
+        const enemigosVivos = enemigos.filter({e => e.vida > 0})
+        if (enemigosVivos.size() <= 0) {
+            self.pasarDeNivel()
+        }
+    }
+    method pasarDeNivel() {
+        pantallas.juego().removerVisual()
+        pantallas.nivel2().agregarVisual()
+
+        pantallas.mensajeNivel2().agregarVisual()
+        game.schedule(2000, {
+        pantallas.mensajeNivel2().removerVisual()
+    })
+    // se puede agregar nuevos enemigos, cambiar el jugador, mostrar mensaje, si quieren
+    }*/
 
     const arania = new Enemigo(
         position = game.at (12,13),

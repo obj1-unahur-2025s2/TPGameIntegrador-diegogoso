@@ -23,6 +23,14 @@ class Enemigo {
       game.removeVisual(self)
     }
   }
+  /* para segundo nivel habria que cambiar este de arriba por este 
+  method recibirAtaque(hechizo) {
+    vida -= hechizo.danio().max(0)
+    if (vida <= 0) {
+        game.removeVisual(self)
+        juego.verificarPasoDeNivel()
+    }
+}*/
 }
 
 
