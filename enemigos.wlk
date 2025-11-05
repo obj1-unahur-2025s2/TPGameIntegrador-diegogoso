@@ -5,11 +5,12 @@ import direcciones.*
 
 class Enemigo {
   var property position = self.posicionAleatoria()
-  var property vida = 30
-  var property image = "arania.png"
+  var property vida
+  var property image
+  var poder // debe retornar una imagen 
 
   method image() = image
-
+  method poder() = poder 
   method moverAleatoriamente() {
     const direcciones = [norte, oeste, sur, este]
     const direccionAleatoria = direcciones.randomized().first()
@@ -21,12 +22,24 @@ class Enemigo {
         const y = 0.randomUpTo(game.height())
         return game.at(x, y)
     }
-
-  method recibirAtaque(hechizo) {
-    vida -= hechizo.danio().max(0)
+      method sacarVida() = (vida - 1).max(0)
+  method recibirAtaque() {
+    if (vida >0){
+      self.sacarVida()
+    } 
     if (vida <= 0) {
-      game.removeVisual(self)
+      self.morir()
     }
+  }
+  method morir() {
+    image = "charcoSangre"
+    // aca deberia cargar pantalla game over
+  }
+  method vida() = vida
+  method lanzarAtaque() {
+    const ataque = new Hechizo()
+    ataque.lanzar(self)
+    game.onCollideDo(ataque, {objetivo => objetivo.recibirAtaque()})
   }
   /* para segundo nivel habria que cambiar este de arriba por este 
   method recibirAtaque(hechizo) {
