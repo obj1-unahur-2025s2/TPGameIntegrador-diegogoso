@@ -39,4 +39,12 @@ class Arania inherits Enemigo {
     game.schedule(400, { image = "arania.png" })
   }
 }
+class Jefe inherits Enemigo {
+  override method sacarVida(cantidad) {
+    super(cantidad)
+    // efecto visual de daño
+    game.schedule(200, { image = "jefedanio.png" })
+    game.schedule(400, { image = "jefe.png" })
+  }
+}
 

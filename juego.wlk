@@ -52,16 +52,23 @@ object juego {
 
     method pasarDeNivel() {
         // Cambia el fondo actual por el fondo del nivel 2 (jefe)
+<<<<<<< Updated upstream
         game.schedule(1000, {
             game.removeVisual(jugador)
             pantallas.juego().removerVisual()
             pantallas.nivel2().agregarVisual()
         })
         
+=======
+        game.removeVisual(jugador)
+        pantallas.juego().removerVisual()
+        pantallas.nivel2().agregarVisual()        
+>>>>>>> Stashed changes
         game.schedule(4000, {
             pantallas.nivel2().removerVisual()
             pantallas.juego().agregarVisual()
-            game.addVisual(jugador)
+            game.addVisualCharacter(jefe)
+            game.addVisualCharacter(jugador)
         })
     }
 

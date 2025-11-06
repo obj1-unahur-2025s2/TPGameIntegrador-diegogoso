@@ -46,3 +46,13 @@ const mago = new Mago(
     magia = 30,
     position = game.center()
 )
+const jefe = new Jefe(
+    vidasRestantes = 10,
+    //nombre = "jefe",
+    image = "jefe.png",
+    position = game.center()
+)
+
+   // magia = 20,
+    
+)
