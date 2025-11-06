@@ -7,6 +7,7 @@ class Hechizo {
   var property image = ""
   var property position = game.at(0,0)
 
+<<<<<<< HEAD
   method enfriamiento() = 2000
   method lanzar(jugador)
   method danio(jugador)
@@ -29,6 +30,10 @@ class Curacion inherits Hechizo {
 class Fuego inherits Hechizo { 
   override method lanzar(jugador) {
     image = "bolaDeFuego" + jugador.ultimaDireccion().nombre() + ".png"             // Imagen de la bola de fuego
+=======
+ method lanzar(jugador) {
+    image = jugador.poder()               // Imagen de la bola de fuego
+>>>>>>> d2ba7ae7d32eef5c51d2ed19d910617069cbe747
     position = jugador.position()              // Aparece en el jugador
     game.addVisual(self)                           // Se muestra en pantalla
 
@@ -41,39 +46,33 @@ class Fuego inherits Hechizo {
     })
 
     game.schedule(1700, {
-        self.eliminarBolaDeFuego()                 // Limpia imagen
+        self.eliminarHechizo()                 // Limpia imagen
         game.removeVisual(self)                    // Se elimina del juego
     })
   }
 
-  method eliminarBolaDeFuego() {
+  method eliminar() {
     image = ""
   }
+<<<<<<< HEAD
 
   override method danio(jugador) = 1
 
   method moverseHacia(direccion) {
+=======
+   method eliminarHechizo() {
+    image = ""
+  }
+ method moverseHacia(direccion) {
+>>>>>>> d2ba7ae7d32eef5c51d2ed19d910617069cbe747
     direccion.mover(self)
   }
 }
 
-class Agua inherits Hechizo {
 
-  override method lanzar(jugador) {
-    if (jugador.mana() >= 10) {
-      jugador.sacarMana(10)
-      position = jugador.position()
-      game.addVisual(self)
 
-      game.schedule(200, {
-        self.expandir()
-      })
-      game.schedule(400, {
-        game.removeVisual(self)
-      })
-    }
-  }
 
+<<<<<<< HEAD
   method expandir() {
     // efecto de expansión: reemplazar imagen o cambiar size
   }
@@ -84,4 +83,6 @@ class Agua inherits Hechizo {
 class Teletransportacion inherits Hechizo {
   // implementar comportamiento de teletransporte cuando haga falta
 }
+=======
+>>>>>>> d2ba7ae7d32eef5c51d2ed19d910617069cbe747
 
