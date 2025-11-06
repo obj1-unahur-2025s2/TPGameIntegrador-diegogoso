@@ -55,4 +55,3 @@ const jefe = new Jefe(
 
    // magia = 20,
     
-)
