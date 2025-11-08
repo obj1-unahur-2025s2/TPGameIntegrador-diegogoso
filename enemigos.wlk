@@ -99,11 +99,12 @@ override method sacarVida() {
 }
 
 class Jefe inherits Enemigo {
-  override method poder() = "bolaDeFuegoAzul.png"
+  // Usa el valor de `poder` pasado en el constructor (bolaDeFuegoVerde.png)
+  // No hace falta override porque hereda method poder() = poder de Enemigo
 
   override method sacarVida() {
     super()
-    game.schedule(200, { self.image("jefeDanio.png") })
+    game.schedule(200, { self.image("jefedanio.png") })
     game.schedule(400, { self.image("jefe.png") })
     if (!self.estaVivo()) {
       juego.removerEnemigo(self)
@@ -111,5 +112,7 @@ class Jefe inherits Enemigo {
       juego.finDelJuego()
     }
   }
+  
+  override method poder() = "bolaDeFuegoVerde.png"
 }
 

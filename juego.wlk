@@ -44,7 +44,7 @@ object juego {
 
     method atacarEnemigos() {
         enemigos.forEach({ enemigo =>
-            const ataque = new Hechizo(esMalvado = true)
+            const ataque = new Hechizo(esMalvado = true, image = enemigo.poder())
             ataque.lanzar(enemigo)
             game.onCollideDo(ataque, {objetivo => objetivo.recibirAtaque(ataque)})
         })

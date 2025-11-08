@@ -38,7 +38,7 @@ const arania = new Arania(
 )
 
 const jefe = new Jefe(
-    vida = 1, // 16
+    vida = 4, // 16
     image = "jefe.png",
-    poder = "bolaDeFuegoAzul.png"
+    poder = "bolaDeFuegoVerde.png"
 )
