@@ -3,12 +3,13 @@ import direcciones.*
 import hechizos.*
 import personajes.*
 import pantallas.*
+import juego.*
 
 class Jugador {
     const nombre
     var property image
     var property position = game.center()
-    var vida = 5
+    var vida = 1
     var direccionActual = este
     method alternarImagen(unaDireccion) {
         image = nombre + unaDireccion.nombre() + ".png"
@@ -33,18 +34,15 @@ class Jugador {
     method sacarVida(cantidad) {
         vida = (vida - cantidad).max(0)
         pantallas.barraDeVida().actualizarse(self)
+        if(!self.estaVivo()) {
+            juego.gameOver()
+        }
     } 
 
     method recibirAtaque(hechizo) {
         if(self.estaVivo() && hechizo.esMalvado()) {
             self.sacarVida(hechizo.danio())
-        } else if (vida == 0) {
-            self.morir()
-        }
-    }
-
-    method morir() {
-        image = "charcoSangre.jpg"
+        } 
     }
 
     method estaVivo() = vida > 0

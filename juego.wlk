@@ -10,8 +10,8 @@ object juego {
     var jugador = arquero
     const enemigos = []
     var enemigosPorGenerar = aranias + orcos // genera la cantidad de enemigos que le pases
-    const aranias = 2
-    const orcos = 2
+    const aranias = 1
+    const orcos = 1
 
     method jugador() = jugador
 
@@ -20,21 +20,13 @@ object juego {
     }
 
     method generarArania() {
-        const enemigo = new Arania(
-                image = "arania.png",   
-                poder = "telarania.png"
-            )
-            enemigos.add(enemigo)
-            game.addVisualCharacter(enemigo)
+        enemigos.add(arania)
+        game.addVisualCharacter(arania)
     }
 
     method generarOrco() {
-        const enemigo = new Orco (
-            image = "orco.png",
-            poder = "bolaOscura.png"
-            )
-            enemigos.add(enemigo)
-            game.addVisualCharacter(enemigo)
+        enemigos.add(orco)
+        game.addVisualCharacter(orco)
     }
 
     method generarEnemigo() {
@@ -69,11 +61,12 @@ object juego {
         const enemigosVivos = enemigos.filter({ e => e.estaVivo() })
         if (enemigosVivos.size() == 0) {
             self.pasarDeNivel()
-        }
+        } 
     }
 
     method pasarDeNivel() {
         // Cambia el fondo actual por el fondo del nivel 2 (jefe)
+        pantallas.barraDeVida().removerVisual()
         game.removeVisual(jugador)
         pantallas.juego().removerVisual()
         pantallas.nivel2().agregarVisual()
@@ -82,14 +75,28 @@ object juego {
             pantallas.juego().agregarVisual()
             pantallas.barraDeVida().agregarVisual()
             game.addVisualCharacter(jugador)
+            game.addVisualCharacter(jefe)
+            enemigos.add(jefe)
         })
     }
 
+    method finDelJuego() {
+        if (!jefe.estaVivo()) {
+            // Si el jefe murió, termina el juego
+            pantallas.barraDeVida().removerVisual()
+            game.removeVisual(jugador)
+            pantallas.juego().removerVisual()
+            pantallas.victoria().agregarVisual()
+            game.schedule(2000, {
+                pantallas.creditos().agregarVisual()
+            })
+            game.schedule(4000, {
+                self.reiniciarJuego()
+            })
+        }
+    }
+
     method iniciarMenu() {
-        game.title("gameGeneral")
-        game.height(16)
-        game.width(16)
-        game.cellSize(64)
         pantallas.inicio().agregarVisual()
 
         keyboard.enter().onPressDo({
@@ -140,6 +147,7 @@ object juego {
         pantallas.juego().agregarVisual()
         pantallas.barraDeVida().agregarVisual()
         game.addVisualCharacter(jugador)
+        
 
         keyboard.w().onPressDo({
             jugador.moverseHacia(norte)
@@ -158,25 +166,48 @@ object juego {
         })
 
         keyboard.j().onPressDo({
-            const fuego = new Fuego(esMalvado = false)
-            fuego.lanzar(jugador)  
-            
-            game.onCollideDo(fuego, { enemigo =>
-                enemigo.recibirAtaque(fuego)
-            })
+            if(game.hasVisual(jugador)) {
+                const fuego = new Fuego(esMalvado = false)
+                fuego.lanzar(jugador)  
+                game.onCollideDo(fuego, { enemigo =>
+                    enemigo.recibirAtaque(fuego)
+                })
+            }
         })
 
         // Generar enemigos cada cierto tiempo
-        game.onTick(1000, "generarEnemigo", { self.generarEnemigo() })
-
+        if(enemigosPorGenerar > 0) {
+            game.onTick(1000, "generarEnemigo", { self.generarEnemigo() })
+        }
+        
         // Mover enemigos
-        game.onTick(2000, "moverEnemigos", { self.moverEnemigos() })
+        game.onTick(1500, "moverEnemigos", { self.moverEnemigos() })
         
         // que lancen su poder
-        game.onTick(3000, "atacarEnemigos", { self.atacarEnemigos() })
-//      game.onTick(6000, "verificarPasoDeNivel", { self.verificarPasoDeNivel() })
+        game.onTick(4000, "atacarEnemigos", { self.atacarEnemigos() })
+    }
 
-        
+    method gameOver() {
+        pantallas.barraDeVida().removerVisual()
+        game.removeVisual(jugador)
+        pantallas.juego().removerVisual()
+        pantallas.gameOver().agregarVisual()
+        game.schedule(4000, {
+            self.reiniciarJuego()
+        })
+    }
 
+    method reiniciarJuego() {
+        // Limpiamos enemigos y removemos la visual del jugador actual antes de
+        // reasignar la referencia `jugador` a la instancia por defecto.
+        enemigos.clear()
+        game.removeVisual(jugador)
+        jugador = arquero
+        pantallas.barraDeVida().removerVisual()
+        pantallas.juego().removerVisual()
+        // Volvemos al menú. No llamamos a `game.stop()` porque detener el motor
+        // impide que `game.addVisualCharacter(jugador)` funcione correctamente
+        // al reiniciar (el engine ya no procesa nuevas visuales).
+        self.iniciarMenu()
     }
 }

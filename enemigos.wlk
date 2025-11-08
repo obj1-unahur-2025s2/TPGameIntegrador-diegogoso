@@ -2,10 +2,11 @@ import hechizos.*
 import juego.*
 import wollok.game.*
 import direcciones.*
+import pantallas.*
 
 class Enemigo {
   var property position = self.posicionAleatoria()
-  var property vida = 3
+  var property vida 
   var property image
   const poder // debe retornar una imagen 
   var ultimaDireccion = sur
@@ -21,12 +22,11 @@ class Enemigo {
     const direccionAleatoria = direcciones.randomized().first()
     direccionAleatoria.mover(self)
     ultimaDireccion = direccionAleatoria
-    self.lanzarAtaque()
   }
 
   method posicionAleatoria() {
-        const x = 0.randomUpTo(game.width())
-        const y = 0.randomUpTo(game.height())
+        const x = 2.randomUpTo(14)
+        const y = 2.randomUpTo(14)
         return game.at(x, y)
     }
 
@@ -59,11 +59,6 @@ class Enemigo {
   }*/
   method vida() = vida
   method estaVivo() = vida > 0
-
-  method lanzarAtaque() {
-    
-  }
-  
 
   /* para segundo nivel habria que cambiar este de arriba por este 
   method recibirDanio() {
@@ -99,6 +94,21 @@ override method sacarVida() {
     if (vida == 0) {
       // Cuando muere, delegamos en el objeto juego para que lo remueva de la lista y la pantalla
       juego.removerEnemigo(self)
+    }
+  }
+}
+
+class Jefe inherits Enemigo {
+  override method poder() = "bolaDeFuegoAzul.png"
+
+  override method sacarVida() {
+    super()
+    game.schedule(200, { self.image("jefeDanio.png") })
+    game.schedule(400, { self.image("jefe.png") })
+    if (!self.estaVivo()) {
+      juego.removerEnemigo(self)
+      pantallas.nivel2().removerVisual()
+      juego.finDelJuego()
     }
   }
 }

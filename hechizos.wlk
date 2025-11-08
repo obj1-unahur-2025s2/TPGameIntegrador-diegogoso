@@ -58,4 +58,6 @@ class Fuego inherits Hechizo {
         game.removeVisual(self)
     })
   } 
+
+  override method danio() = 2
 }
