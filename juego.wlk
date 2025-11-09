@@ -48,7 +48,6 @@ object juego {
     }
 
     method atacarEnemigos() {
-        game.schedule(5000.randomUpTo(10000),{
             enemigos.forEach({ enemigo =>
             const ataque = new Hechizo(esMalvado = true, image = enemigo.poder())
             ataque.lanzar(enemigo)
@@ -187,7 +186,7 @@ object juego {
                 const poder = new Hechizo(esMalvado = false)
                 poder.lanzar(jugador)
                 game.onCollideDo(poder, { enemigo => enemigo.recibirAtaque(poder) })
-                game.schedule(2000,{ puedeAtacar = true})
+                game.schedule(1000,{ puedeAtacar = true})
             }
         })
 
