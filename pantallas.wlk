@@ -4,7 +4,7 @@ object pantallas {
 	const property inicio = new Fondo(position=game.at(0,0), img="pantallaInicio.png")
 	const property seleccion = new Fondo(position=game.at(0,0), img="seleccionDePersonajes.png")
 	const property juego = new Fondo(position=game.at(0,0), img="fondoDelJuego.png")
-	const property nivel2 = new Fondo(position=game.at(0,0), img="niveldosfondo.png")
+	const property nivel2 = new Fondo(position=game.at(0,0), img="nivel2.png")
 	const property barraDeVida = new BarraDeVida(position = game.at(0,14), img = "1barradevida.png")
 	const property victoria = new Fondo(position=game.at(0,0), img="findeljuego.png")
 	const property creditos = new Fondo(position=game.at(0,0), img="creditos.png")

@@ -85,9 +85,13 @@ object juego {
             // Si el jefe murió, termina el juego
             pantallas.barraDeVida().removerVisual()
             game.removeVisual(jugador)
+            game.removeVisual(jefe)
+            game.removeTickEvent("generarEnemigo")
+            game.removeTickEvent("moverEnemigos")
+            game.removeTickEvent("atacarEnemigos")
             pantallas.juego().removerVisual()
             pantallas.victoria().agregarVisual()
-            game.schedule(2000, {
+            game.schedule(8000, {
                 pantallas.creditos().agregarVisual()
             })
             game.schedule(4000, {
@@ -190,6 +194,10 @@ object juego {
     method gameOver() {
         pantallas.barraDeVida().removerVisual()
         game.removeVisual(jugador)
+        game.removeVisual(jefe)
+        game.removeTickEvent("generarEnemigo")
+        game.removeTickEvent("moverEnemigos")
+        game.removeTickEvent("atacarEnemigos")
         pantallas.juego().removerVisual()
         pantallas.gameOver().agregarVisual()
         game.schedule(4000, {
@@ -201,8 +209,11 @@ object juego {
         // Limpiamos enemigos y removemos la visual del jugador actual antes de
         // reasignar la referencia `jugador` a la instancia por defecto.
         enemigos.clear()
+        game.removeTickEvent("generarEnemigo")
+        game.removeTickEvent("moverEnemigos")
+        game.removeTickEvent("atacarEnemigos")
         game.removeVisual(jugador)
-        jugador = arquero
+        game.removeVisual(jefe)
         pantallas.barraDeVida().removerVisual()
         pantallas.juego().removerVisual()
         // Volvemos al menú. No llamamos a `game.stop()` porque detener el motor

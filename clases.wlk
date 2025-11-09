@@ -9,7 +9,7 @@ class Jugador {
     const nombre
     var property image
     var property position = game.center()
-    var vida = 1
+    var vida = 5
     var direccionActual = este
     method alternarImagen(unaDireccion) {
         image = nombre + unaDireccion.nombre() + ".png"
