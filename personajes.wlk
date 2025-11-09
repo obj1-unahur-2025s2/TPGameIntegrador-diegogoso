@@ -6,21 +6,25 @@ import hechizos.*
 import enemigos.*
 
 const guerrero = new Guerrero(
+    vida = 5,
     nombre = "guerrero",
     image = "guerreroeste.png"
 )
 
 const arquero = new Arquero(
+    vida = 5,
     nombre = "arquero",
     image = "arqueroeste.png"
 )
 
 const barbaro = new Barbaro(
+    vida = 5,
     nombre = "barbaro",
     image = "barbaroeste.png"
 )
 
 const mago = new Mago(
+    vida = 5,
     nombre = "mago",
     image = "magoeste.png"
 )

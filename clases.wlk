@@ -51,16 +51,16 @@ class Jugador {
 }
 
 class Guerrero inherits Jugador { 
-    override method poder() = "hacha.png"
+    override method poder() = ""
 }
 
 class Arquero inherits Jugador {
-    override method poder() = "flecha.png"
+    override method poder() = "flechaeste.png"
 }
 
 
 class Barbaro inherits Jugador {
-     override method poder() = "arania.png"
+     override method poder() = "hachaeste.png"
 }
 
 class Mago inherits Jugador {

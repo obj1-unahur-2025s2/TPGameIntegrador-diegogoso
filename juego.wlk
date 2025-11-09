@@ -178,6 +178,25 @@ object juego {
                 })
             }
         })
+        keyboard.n().onPressDo({
+            if(game.hasVisual(jugador)) {
+                const hacha = new Hacha(esMalvado = false)
+                hacha.lanzar(jugador)  
+                game.onCollideDo(hacha, { enemigo =>
+                    enemigo.recibirAtaque(hacha)
+                })
+            }
+        })
+
+         keyboard.l().onPressDo({
+            if(game.hasVisual(jugador)) {
+                const flecha = new Flecha(esMalvado = false)
+                flecha.lanzar(jugador)  
+                game.onCollideDo(flecha, { enemigo =>
+                    enemigo.recibirAtaque(flecha)
+                })
+            }
+        })
 
         // Generar enemigos cada cierto tiempo
         if(enemigosPorGenerar > 0) {
