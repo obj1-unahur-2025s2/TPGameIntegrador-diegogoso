@@ -48,8 +48,16 @@ object juego {
         enemigos.forEach({ enemigo =>
             const ataque = new Hechizo(esMalvado = true, image = enemigo.poder())
             ataque.lanzar(enemigo)
-            game.onCollideDo(ataque, { objetivo => objetivo.sacarVida(1) })
+            game.onCollideDo(ataque, { objetivo => objetivo.recibirAtaque(ataque) })
         })
+    }
+
+    method atacarJefe() {
+        if (jefe.estaVivo()) {
+            const bolaDeFuegoVerde = new BolaDeFuegoVerde(esMalvado = true, image = jefe.poder())
+            bolaDeFuegoVerde.lanzar(jefe)
+            game.onCollideDo(bolaDeFuegoVerde, { objetivo => objetivo.recibirAtaque(bolaDeFuegoVerde) })
+        }
     }
 
     method removerEnemigo(enemigo) {
@@ -78,6 +86,8 @@ object juego {
             jugador.darVida()
             game.addVisualCharacter(jefe)
             enemigos.add(jefe)
+            game.removeTickEvent("atacarEnemigos")
+            game.onTick(2000, "atacarJefe", { self.atacarJefe() })
         })
     }
 
@@ -160,6 +170,7 @@ object juego {
         pantallas.juego().agregarVisual()
         pantallas.barraDeVida().agregarVisual()
         game.addVisualCharacter(jugador)
+        pantallas.barraDeVida().actualizarse(jugador)
 
         keyboard.w().onPressDo({ jugador.moverseHacia(norte) })
         keyboard.s().onPressDo({ jugador.moverseHacia(sur) })

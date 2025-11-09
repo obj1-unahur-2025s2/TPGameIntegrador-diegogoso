@@ -8,7 +8,7 @@ class Enemigo {
   var property position = self.posicionAleatoria()
   var property vida 
   var property image
-  const poder // debe retornar una imagen 
+  const poder 
   var ultimaDireccion = sur
 
   method image() = image
@@ -30,8 +30,8 @@ class Enemigo {
         return game.at(x, y)
     }
 
-  method sacarVida() { 
-    vida = (vida - 1).max(0) 
+  method sacarVida(cantidad) { 
+    vida = (vida - cantidad).max(0) 
     
     if (vida == 0) {
       // Cuando muere, delegamos en el objeto juego para que lo remueva de la lista y la pantalla
@@ -39,12 +39,13 @@ class Enemigo {
       game.schedule(4000, {
       game.addVisual("charcoSangre.jpg")
       game.removeVisual("charcoSangre.jpg")       
-        })
-    }}
+      })
+    }
+  }
 
     method recibirAtaque(hechizo) {
       if (vida > 0 && !hechizo.esMalvado()) {
-        self.sacarVida()
+        self.sacarVida(hechizo.danio())
       }
     }
 /*
@@ -73,8 +74,8 @@ class Enemigo {
 class Arania inherits Enemigo {
   override method poder() = "telaarania.png"
   
-  override method sacarVida() {
-    super()
+  override method sacarVida(cantidad) {
+    super(cantidad)
     game.schedule(200, { self.image("araniadanio.png") })
     game.schedule(400, { self.image("arania.png") })
     if (vida == 0) {
@@ -87,12 +88,11 @@ class Arania inherits Enemigo {
 class Orco inherits Enemigo {
   override method poder() = "bolaOscura.png"
 
-override method sacarVida() {
-    super()
+override method sacarVida(cantidad) {
+    super(cantidad)
     game.schedule(200, { self.image("orcoDanio.png") })
     game.schedule(400, { self.image("orco.png") })
     if (vida == 0) {
-      // Cuando muere, delegamos en el objeto juego para que lo remueva de la lista y la pantalla
       juego.removerEnemigo(self)
     }
   }
@@ -102,8 +102,8 @@ class Jefe inherits Enemigo {
   // Usa el valor de `poder` pasado en el constructor (bolaDeFuegoVerde.png)
   // No hace falta override porque hereda method poder() = poder de Enemigo
 
-  override method sacarVida() {
-    super()
+  override method sacarVida(cantidad) {
+    super(cantidad)
     game.schedule(200, { self.image("jefedanio.png") })
     game.schedule(400, { self.image("jefe.png") })
     if (!self.estaVivo()) {
