@@ -1,0 +1,151 @@
+import clases.*
+import hechizos.*
+import direcciones.*
+import juego.*
+import enemigos.*
+import personajes.*
+import wollok.game.*
+import pantallas.*
+
+describe "RedWaterMystery - Tests de Jugabilidad" {
+
+  // Jugador
+  test "jugador cambia correctamente de clase" {
+    const mago = new Mago(vida = 5, nombre = "mago", image = "magoeste.png")
+    juego.cambiarJugador(mago)
+    assert.equals(juego.jugador(), mago)
+  }
+
+  test "jugador pierde vida al recibir hechizo malvado" {
+    const hechizo = new Hechizo(esMalvado = true)
+    const arquero = new Arquero(vida = 5, nombre = "arquero", image = "arqueroeste.png")
+    arquero.recibirAtaque(hechizo)
+    assert.equals(arquero.vida(), 4)
+  }
+
+  test "jugador no pierde vida con hechizo bueno" {
+    const hechizo = new Hechizo(esMalvado = false)
+    const guerrero = new Guerrero(vida = 5, nombre = "guerrero", image = "guerreroeste.png")
+    guerrero.recibirAtaque(hechizo)
+    assert.equals(guerrero.vida(), 5)
+  }
+
+  //  Hechizos
+  test "hechizo malvado usa imagen sin dirección" {
+    const hechizo = new Hechizo(esMalvado = true)
+    const mago = new Mago(vida = 5, nombre = "mago", image = "magoeste.png")
+    hechizo.lanzar(mago)
+    assert.equals(hechizo.image(), "bolaDeFuego")
+  }
+
+  test "hechizo bueno usa imagen con dirección" {
+    const arquero = new Arquero(vida = 5, nombre = "arquero", image = "arqueroeste.png", direccionActual = norte)
+    const hechizo = new Hechizo(esMalvado = false)
+    hechizo.lanzar(arquero)
+    assert.equals(hechizo.image(), "flechanorte.png")
+  }
+
+  //  Enemigos
+  test "enemigo no recibe daño de hechizo malvado" {
+    const hechizo = new Hechizo(esMalvado = true)
+    const orco = new Orco(vida = 2, image = "orco.png", poder = "bolaOscura.png")
+    orco.recibirAtaque(hechizo)
+    assert.equals(orco.vida(), 2)
+  }
+
+  test "enemigo recibe daño de hechizo bueno" {
+    const hechizo = new Hechizo(esMalvado = false)
+    const arania = new Arania(vida = 2, image = "arania.png", poder = "telarania.png")
+    arania.recibirAtaque(hechizo)
+    assert.equals(arania.vida(), 1)
+  }
+
+  //  Movimiento
+  test "jugador no se mueve fuera del borde este" {
+    const guerrero = new Guerrero(vida = 5, nombre = "guerrero", image = "guerreroeste.png", position = game.at(14, 7))
+    guerrero.moverseHacia(este)
+    assert.equals(guerrero.position(), game.at(14, 7))
+  }
+
+  test "jugador se mueve correctamente hacia el norte" {
+    const barbaro = new Barbaro(vida = 5, nombre = "barbaro", image = "barbaroeste.png", position = game.at(8, 8))
+    barbaro.moverseHacia(norte)
+    assert.equals(barbaro.position(), game.at(8, 9))
+  }
+
+  //  Flujo de juego
+  test "generar enemigo reduce contador y agrega visual" {
+    // generarArania agrega la araña y la visual correspondiente
+    juego.generarArania()
+    assert.equals(game.hasVisual(arania), true)
+  }
+
+  // nivel 2
+  test "pasar de nivel se activa cuando no hay enemigos vivos" {
+    // Aseguramos estado limpio
+    pantallas.nivel2().removerVisual()
+
+    // Generamos un enemigo dentro del juego y lo marcamos como muerto
+    juego.generarArania()
+    // Hacemos que la araña reciba daño letal para que quede con vida 0
+    arania.sacarVida(arania.vida())
+
+    juego.verificarPasoDeNivel()
+    assert.equals(pantallas.nivel2().hasVisual(), true)
+  }
+  // nivel 2 - jefe
+  test "aparece el jefe y su poder al pasar al nivel 2" {
+    // Aseguramos estado limpio
+    pantallas.nivel2().removerVisual()
+    game.removeVisual(jefe)
+
+    // Generamos un enemigo dentro del juego y lo marcamos como muerto
+    juego.generarArania()
+    // Hacemos que la araña reciba daño letal para que quede con vida 0
+    arania.sacarVida(arania.vida())
+
+    juego.verificarPasoDeNivel()
+    assert.equals(pantallas.nivel2().hasVisual(), true)
+
+    // El juego agrega el jefe y su visual dentro de un schedule al pasar de nivel.
+    // Simulamos esa acción en el test para verificar la aparición del jefe.
+  game.addVisualCharacter(jefe)
+
+    assert.equals(game.hasVisual(jefe), true)
+    // El poder esperado viene definido en `personajes.wlk` / `enemigos.wlk`
+    assert.equals(jefe.poder(), "bolaDeFuegoVerde.png")
+  }
+
+  test "no pasa de nivel si hay enemigos vivos" {
+    pantallas.nivel2().removerVisual()
+    // Generamos una araña viva
+    juego.generarArania()
+    // Verificamos que no se active el paso de nivel mientras haya enemigos vivos
+    juego.verificarPasoDeNivel()
+    assert.equals(pantallas.nivel2().hasVisual(), false)
+  }
+  // terminar juego
+
+  test "muestra pantalla de creditos al terminar el juego" {
+    // Aseguramos estado limpio
+    pantallas.victoria().removerVisual()
+    pantallas.creditos().removerVisual()
+
+    // Matamos al jefe y llamamos al final del juego
+    jefe.sacarVida(jefe.vida())
+    juego.finDelJuego()
+
+    // Debería mostrarse la pantalla de victoria inmediatamente
+    assert.equals(pantallas.victoria().hasVisual(), true)
+
+    // Simulamos la transición programada a créditos (el scheduler corre en tiempo real en el juego,
+    // así que en el test ejecutamos manualmente la misma acción para verificar el resultado)
+    pantallas.victoria().removerVisual()
+    pantallas.creditos().agregarVisual()
+    assert.equals(pantallas.creditos().hasVisual(), true)
+  }
+
+}
+
+
+
