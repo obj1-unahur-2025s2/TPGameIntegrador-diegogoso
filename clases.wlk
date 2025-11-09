@@ -27,7 +27,7 @@ class Jugador {
 
     method vida() = vida
 
-    method vidaMaxima() = 5  
+    method vidaMaxima() = 5
 
     method darVida() { vida = 5}
 

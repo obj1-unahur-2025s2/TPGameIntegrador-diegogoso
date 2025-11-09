@@ -12,6 +12,9 @@ object juego {
     var aranias = 1
     var orcos = 1
     var enemigosPorGenerar = aranias + orcos
+    var puedeAtacar = true
+
+    method puedeAtacar() = puedeAtacar
 
     method jugador() = jugador
 
@@ -45,10 +48,12 @@ object juego {
     }
 
     method atacarEnemigos() {
-        enemigos.forEach({ enemigo =>
+        game.schedule(5000.randomUpTo(10000),{
+            enemigos.forEach({ enemigo =>
             const ataque = new Hechizo(esMalvado = true, image = enemigo.poder())
             ataque.lanzar(enemigo)
             game.onCollideDo(ataque, { objetivo => objetivo.sacarVida(1) })
+            })
         })
     }
 
@@ -167,10 +172,12 @@ object juego {
         keyboard.d().onPressDo({ jugador.moverseHacia(este) })
 
         keyboard.j().onPressDo({
-            if (game.hasVisual(jugador)) {
+            if (game.hasVisual(jugador) and self.puedeAtacar()) {
+                puedeAtacar = false
                 const poder = new Hechizo(esMalvado = false)
                 poder.lanzar(jugador)
                 game.onCollideDo(poder, { enemigo => enemigo.recibirAtaque(poder) })
+                game.schedule(2000,{ puedeAtacar = true})
             }
         })
 
