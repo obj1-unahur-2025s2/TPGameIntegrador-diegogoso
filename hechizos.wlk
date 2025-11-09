@@ -31,11 +31,15 @@ method lanzar(jugador) {
   }
 
   // 5. El método que usa la colisión para saber cuánto dañar
-  method danio(jugador) = 1
+  method danio() = 1
 
   // 6. El método que usa el 'schedule' para moverse
   method moverseHacia(direccion) {
     // ESTO DEPENDE DE 'direcciones.wlk'
     direccion.mover(self)
   }
+}
+
+class BolaDeFuegoVerde inherits Hechizo {
+  override method danio() = 2
 }

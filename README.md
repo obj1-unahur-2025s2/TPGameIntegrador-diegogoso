@@ -14,8 +14,12 @@
 ![Pantalla Inicio](assets/capturas/inicio.png)
 ![Selección de Personajes](assets/capturas/seleccionPersonajes.png)
 ![Pantalla Nivel 1](assets/capturas/nivel1.png)
+![Pantalla Transición a Nivel 2](assets/capturas/nivel2.png)
 ![Pantalla Final](assets/capturas/nivelFinal.png)
 ![Desarrolladores](assets/capturas/desarrolladores.png)
+![Pantalla Derrota](assets/capturas/derrota.png)
+![Pantalla Fin Del Juego](assets/capturas/finDelJuego.png)
+
 
 
 ## ⚔️ Reglas de Juego / Instrucciones
