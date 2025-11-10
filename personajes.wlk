@@ -26,7 +26,7 @@ const mago = new Mago(
 )
 
 const orco = new Orco (
-    vida = 1, // 8
+    vida = 4, 
     image = "orco.png",
     poder = "bolaOscura.png"
 )

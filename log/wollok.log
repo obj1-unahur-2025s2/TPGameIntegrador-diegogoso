@@ -266,3 +266,11 @@
 {"level":"info","message":"⌛ Building environment","timeElapsed":164,"timestamp":"2025-11-10T15:30:22.455Z"}
 {"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mgame.redWaterMystery\u001b[39m\u001b[23m on \u001b[3m\u001b[34mc:\\Users\\Usuario\\Desktop\\ProyectosWollok\\TPGameIntegrador-diegogoso\u001b[39m\u001b[23m","ok":true,"timeElapsed":454,"timestamp":"2025-11-10T15:30:23.158Z"}
 {"exitCode":"SIGHUP","level":"info","message":"👾 Game executed game.redWaterMystery on c:\\Users\\Usuario\\Desktop\\ProyectosWollok\\TPGameIntegrador-diegogoso","timeElapsed":60307,"timestamp":"2025-11-10T15:31:23.019Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":104,"timestamp":"2025-11-10T16:08:26.282Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":146,"timestamp":"2025-11-10T16:08:45.134Z"}
+{"level":"info","message":"⌛ Validating personajes.wlk","timeElapsed":105,"timestamp":"2025-11-10T16:08:45.239Z"}
+{"level":"info","message":"⌛ Building environment","timeElapsed":137,"timestamp":"2025-11-10T16:08:45.871Z"}
+{"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mgame.redWaterMystery\u001b[39m\u001b[23m on \u001b[3m\u001b[34mc:\\Users\\Cristian\\Desktop\\obj1-cursada\\TPGameIntegrador-diegogoso\u001b[39m\u001b[23m","ok":true,"timeElapsed":327,"timestamp":"2025-11-10T16:08:47.620Z"}
+{"exitCode":"SIGHUP","level":"info","message":"👾 Game executed game.redWaterMystery on c:\\Users\\Cristian\\Desktop\\obj1-cursada\\TPGameIntegrador-diegogoso","timeElapsed":24519,"timestamp":"2025-11-10T16:09:11.811Z"}
+{"level":"info","message":"🚀 Program executed \u001b[3m\u001b[34mgame.redWaterMystery\u001b[39m\u001b[23m on \u001b[3m\u001b[34mc:\\Users\\Cristian\\Desktop\\obj1-cursada\\TPGameIntegrador-diegogoso\u001b[39m\u001b[23m","ok":true,"timeElapsed":353,"timestamp":"2025-11-10T16:09:13.045Z"}
+{"exitCode":"SIGHUP","level":"info","message":"👾 Game executed game.redWaterMystery on c:\\Users\\Cristian\\Desktop\\obj1-cursada\\TPGameIntegrador-diegogoso","timeElapsed":37269,"timestamp":"2025-11-10T16:09:49.961Z"}
