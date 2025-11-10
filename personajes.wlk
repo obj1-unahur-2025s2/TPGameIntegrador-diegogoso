@@ -25,18 +25,6 @@ const mago = new Mago(
     image = "magoeste.png"
 )
 
-const orco = new Orco (
-    vida = 4, 
-    image = "orco.png",
-    poder = "bolaOscura.png"
-)
-
-const arania = new Arania(
-    vida = 4,
-    image = "arania.png",   
-    poder = "telarania.png"
-)
-
 const jefe = new Jefe(
     vida = 12,
     vidaInicial = 12,
