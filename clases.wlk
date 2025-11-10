@@ -12,6 +12,9 @@ class Jugador {
     var vida = 5
     const vidaInicial = 5
     var direccionActual = este
+
+    method poder()  
+
     method alternarImagen(unaDireccion) {
         image = nombre + unaDireccion.nombre() + ".png"
     }
@@ -20,6 +23,7 @@ class Jugador {
     method restaurar() {
       vida = vidaInicial
     }
+    
     method moverseHacia(direccion) {
         self.alternarImagen(direccion)
         direccion.mover(self)
@@ -49,8 +53,6 @@ class Jugador {
     }
 
     method estaVivo() = vida > 0
-    
-    method poder()  
 }
 
 class Guerrero inherits Jugador { 

@@ -48,14 +48,14 @@ describe "RedWaterMystery - Tests de Jugabilidad" {
   //  Enemigos
   test "enemigo no recibe daño de hechizo malvado" {
     const hechizo = new Hechizo(esMalvado = true)
-    const orco = new Orco(vida = 2,vidaInicial = 2, image = "orco.png", poder = "bolaOscura.png")
+    const orco = new Orco(vida = 2, image = "orco.png", poder = "bolaOscura.png")
     orco.recibirAtaque(hechizo)
     assert.equals(orco.vida(), 2)
   }
 
   test "enemigo recibe daño de hechizo bueno" {
     const hechizo = new Hechizo(esMalvado = false)
-    const arania = new Arania(vida = 2,vidaInicial =2, image = "arania.png", poder = "telarania.png")
+    const arania = new Arania(vida = 2, image = "arania.png", poder = "telarania.png")
     arania.recibirAtaque(hechizo)
     assert.equals(arania.vida(), 1)
   }
@@ -165,7 +165,7 @@ describe "RedWaterMystery - Tests de Jugabilidad" {
 
   test "colisiones aplican daño al enemigo (simulación onCollideDo)" {
     const hechizo = new Hechizo(esMalvado = false)
-    const arania = new Arania(vida = 2,vidaInicial=2, image = "arania.png", poder = "telarania.png")
+    const arania = new Arania(vida = 2, image = "arania.png", poder = "telarania.png")
 
     // En el juego real se registra un handler con game.onCollideDo; aquí comprobamos el efecto
     // simulando la colisión: el handler normalmente invocaría objetivo.recibirAtaque(hechizo)
