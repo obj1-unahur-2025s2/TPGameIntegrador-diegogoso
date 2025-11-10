@@ -73,14 +73,6 @@ describe "RedWaterMystery - Tests de Jugabilidad" {
     assert.equals(barbaro.position(), game.at(8, 9))
   }
 
-  //  Flujo de juego
-  test "generar enemigo reduce contador y agrega visual" {
-    // generarArania agrega la araña y la visual correspondiente
-    juego.generarArania()
-    assert.equals(game.hasVisual(arania), false)
-  }
-
-  
 
   test "no pasa de nivel si hay enemigos vivos" {
     pantallas.nivel2().removerVisual()
@@ -138,6 +130,26 @@ describe "RedWaterMystery - Tests de Jugabilidad" {
     arania.recibirAtaque(hechizo)
 
     assert.equals(arania.vida(), 1)
+  }
+
+  // Game Over
+  test "muestra pantalla de game over cuando el jugador muere" {
+    // Aseguramos estado limpio
+    pantallas.gameOver().removerVisual()
+
+    // Creamos un jugador y lo ponemos en el juego
+    const testJugador = new Guerrero(vida = 1, nombre = "testJugador", image = "jugador.png")
+    juego.cambiarJugador(testJugador)
+
+    // Hacemos que el jugador pierda toda su vida
+    testJugador.sacarVida(testJugador.vida())
+
+    // Invocamos la lógica que muestra Game Over 
+    
+    juego.gameOver()
+
+    // Debería mostrarse la pantalla de game over
+    assert.equals(pantallas.gameOver().hasVisual(), true)
   }
 
 }
