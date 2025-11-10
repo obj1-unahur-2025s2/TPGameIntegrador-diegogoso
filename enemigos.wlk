@@ -7,14 +7,9 @@ import pantallas.*
 class Enemigo {
   var property position = self.posicionAleatoria()
   var property vida 
-  var property image
-  const poder 
-  const vidaInicial
+  var property image = ""
+  const poder = ""
   var ultimaDireccion = sur
-  
-  method restaurar() {
-    vida = vidaInicial
-  }
 
   method image() = image
 
@@ -60,6 +55,7 @@ class Enemigo {
 }
 
 class Arania inherits Enemigo {
+  override method image() = "arania.png"
   override method poder() = "telaarania.png"
   
   override method sacarVida(cantidad) {
@@ -74,6 +70,7 @@ class Arania inherits Enemigo {
 }
 
 class Orco inherits Enemigo {
+  override method image() = "orco.png"
   override method poder() = "bolaOscura.png"
 
 override method sacarVida(cantidad) {
@@ -87,6 +84,8 @@ override method sacarVida(cantidad) {
 }
 
 class Jefe inherits Enemigo {
+  const vidaInicial = 12
+  method restaurar() { vida = vidaInicial }
   // Usa el valor de `poder` pasado en el constructor (bolaDeFuegoVerde.png)
   // No hace falta override porque hereda method poder() = poder de Enemigo
 

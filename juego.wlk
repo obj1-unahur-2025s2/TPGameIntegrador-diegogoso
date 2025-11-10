@@ -10,7 +10,7 @@ object juego {
     var jugador = arquero
     const enemigos = []
     var aranias = 1
-    var orcos = 1
+    var orcos = 2
     var enemigosPorGenerar = aranias + orcos
     var puedeAtacar = true
 
@@ -23,22 +23,25 @@ object juego {
     }
 
     method generarArania() {
+        const arania = new Arania( vida = 3 )
         enemigos.add(arania)
         game.addVisualCharacter(arania)
+        aranias = (aranias - 1).max(0)
     }
 
     method generarOrco() {
+        const orco = new Orco( vida = 1 )
         enemigos.add(orco)
         game.addVisualCharacter(orco)
+        orcos = (orcos - 1).max(0)
     }
 
     method generarEnemigo() {
         if (enemigosPorGenerar > 0 and aranias > 0) {
             self.generarArania()
-            aranias -= 1
             enemigosPorGenerar = (enemigosPorGenerar - 1).max(0)
-        }else if(enemigosPorGenerar>0 and orcos > 0){  self.generarOrco()
-            orcos -= 1
+        }else if(enemigosPorGenerar>0 and orcos > 0){  
+            self.generarOrco()
             enemigosPorGenerar = (enemigosPorGenerar - 1).max(0)
         }
     }
@@ -115,7 +118,7 @@ object juego {
             game.schedule(4000, {
                 pantallas.victoria().removerVisual()
                 pantallas.creditos().agregarVisual()
-                game.schedule(8000, {
+                game.schedule(4000, {
                     pantallas.creditos().removerVisual()
                     self.reiniciarJuego()
                 })
@@ -169,6 +172,7 @@ object juego {
     }
 
     method iniciar() {
+        game.clear()
         pantallas.seleccion().removerVisual()
         pantallas.juego().agregarVisual()
         pantallas.barraDeVida().agregarVisual()
@@ -204,16 +208,15 @@ object juego {
             game.schedule(4000, {
                 pantallas.gameOver().agregarVisual()
                 pantallas.creditos().agregarVisual()
-                game.schedule(8000, {
-                    pantallas.creditos().removerVisual()
+                game.schedule(4000, {
                     self.reiniciarJuego()
                 })
             })
     }
 
     method reiniciarJuego() {
-        arania.restaurar()
-        orco.restaurar()
+        self.detenerEventos()
+        game.clear()
         jefe.restaurar()
         arquero.restaurar()
         barbaro.restaurar()
@@ -221,10 +224,9 @@ object juego {
         mago.restaurar()
         enemigos.clear()
         aranias = 1
-        orcos = 1
+        orcos = 2
         enemigosPorGenerar = aranias + orcos
-        self.detenerEventos()
-        game.clear()
+        
         self.iniciarMenu()
     }
 }
