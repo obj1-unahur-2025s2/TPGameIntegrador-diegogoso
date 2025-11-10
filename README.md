@@ -9,7 +9,8 @@
 * Diego Goso
 * Darío Robles
 * Florencia Saharrea
-
+PRESENTACION:
+https://docs.google.com/presentation/d/1aUXR1Wd1IOLSuGrzuSM0re2AAUJssk1T/edit?usp=sharing&ouid=114910798792590590614&rtpof=true&sd=true
 ## 📸 Capturas
 ![Pantalla Inicio](assets/capturas/inicio.png)
 ![Selección de Personajes](assets/capturas/seleccionPersonajes.png)
