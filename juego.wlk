@@ -26,14 +26,14 @@ object juego {
     }
 
     method generarArania() {
-        const arania = new Arania( vida = 4 )
+        const arania = new Arania(vida = 4, image= "arania.png")
         enemigos.add(arania)
         game.addVisualCharacter(arania)
         aranias = (aranias - 1).max(0)
     }
 
     method generarOrco() {
-        const orco = new Orco( vida = 4 )
+        const orco = new Orco(vida = 4, image= "orco.png")
         enemigos.add(orco)
         game.addVisualCharacter(orco)
         orcos = (orcos - 1).max(0)

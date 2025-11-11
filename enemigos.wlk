@@ -7,7 +7,7 @@ import pantallas.*
 class Enemigo {
   var property position = self.posicionAleatoria()
   var property vida 
-  var property image = ""
+  var property image
   const poder = ""
   var ultimaDireccion = sur
 
@@ -34,9 +34,9 @@ class Enemigo {
   }
 
   method posicionAleatoria() {
-        const x = 2.randomUpTo(limiteMaximo)
-        const y = 2.randomUpTo(limiteMaximo)
-        return game.at(x, y)
+    const x = 2.randomUpTo(limiteMaximo)
+    const y = 2.randomUpTo(limiteMaximo)
+    return game.at(x, y)
     }
 
   method sacarVida(cantidad) { 
@@ -55,12 +55,11 @@ class Enemigo {
 }
 
 class Arania inherits Enemigo {
-  override method image() = "arania.png"
   override method poder() = "telaarania.png"
   
   override method sacarVida(cantidad) {
     super(cantidad)
-    game.schedule(200, { self.image("araniadanio.png") })
+    game.schedule(200, { self.image("araniaDanio.png") })
     game.schedule(400, { self.image("arania.png") })
     if (!self.estaVivo()) {
         juego.removerEnemigo(self)
@@ -69,16 +68,15 @@ class Arania inherits Enemigo {
 }
 
 class Orco inherits Enemigo {
-  override method image() = "orco.png"
   override method poder() = "bolaOscura.png"
 
 override method sacarVida(cantidad) {
-    super(cantidad)
-    game.schedule(200, { self.image("orcoDanio.png") })
-    game.schedule(400, { self.image("orco.png") })
-     if (!self.estaVivo()) {
-      juego.removerEnemigo(self)
-      }  
+  super(cantidad)
+  game.schedule(200, { self.image("orcoDanio.png") })
+  game.schedule(400, { self.image("orco.png") })
+  if (!self.estaVivo()) {
+    juego.removerEnemigo(self)
+    }  
   }
 }
 
