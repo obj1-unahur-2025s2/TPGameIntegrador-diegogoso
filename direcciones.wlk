@@ -1,5 +1,3 @@
-/*Se asigna como variable personaje y no jugador, para poder usar correctamente el limite 
-en jugador y enemigos*/
 
 //limites del tablero
 const limiteMaximo = 15
@@ -16,7 +14,6 @@ object norte {
 
 object sur {
   method nombre() = "sur"
-
   method mover(personaje) {
     if(personaje.position().y() > limiteMinimo) {
       personaje.position(personaje.position().down(1))
@@ -26,7 +23,6 @@ object sur {
 
 object este {
   method nombre() = "este"
-
   method mover(personaje) {
     if(personaje.position().x() < limiteMaximo) {
       personaje.position(personaje.position().right(1))
@@ -36,7 +32,6 @@ object este {
 
 object oeste {
   method nombre() = "oeste"
-
   method mover(personaje) {
     if(personaje.position().x() > limiteMinimo) {
       personaje.position(personaje.position().left(1))

@@ -18,19 +18,27 @@ class Enemigo {
 
   method poder() = poder 
 
+  method position() = position
+
   method ultimaDireccion() = ultimaDireccion
 
-  method moverAleatoriamente() { 
+method moverAleatoriamente() { 
     const direccion = [norte, oeste, sur, este].randomized().first()
-    pasosRestantes = 1.randomUpTo(6) //genero la cantidad de pasos aleatorios, entre 1 y 6
+    pasosRestantes = 1.randomUpTo(8) //genero la cantidad de pasos aleatorios, entre 1 y 8
     direccionActual = direccion
-    if (pasosRestantes > 0) {
+      if(pasosRestantes > 0 || self.distanciaAlBorde() > 0) {
         direccionActual.mover(self)  // ESTO DEPENDE DE 'direcciones.wlk'
-        pasosRestantes = pasosRestantes - 1
-    } else {
-        self.moverAleatoriamente() //Cuando no quedan pasos, elije un  nuevo movimiento
-    }
+        pasosRestantes -= 1
+      } else {
+        self.moverAleatoriamente() //Cuando no hay mas passos o esta en borde, genera un nuevo movimiento
+      }
     ultimaDireccion = direccionActual
+  }
+
+  method distanciaAlBorde() {
+    const distanciaX = (limiteMaximo - self.position().x() - 1).max(0)
+    const distanciaY = (limiteMaximo - self.position().y() - 1).max(0)
+    return (game.at(distanciaX, distanciaY))
   }
 
   method posicionAleatoria() {

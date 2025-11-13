@@ -184,11 +184,12 @@ object juego {
         pantallas.barraDeVida().agregarVisual()
         game.addVisualCharacter(jugador)
         pantallas.barraDeVida().actualizarse(jugador)
-
+       
         keyboard.w().onPressDo({ jugador.moverseHacia(norte) })
         keyboard.s().onPressDo({ jugador.moverseHacia(sur) })
         keyboard.a().onPressDo({ jugador.moverseHacia(oeste) })
         keyboard.d().onPressDo({ jugador.moverseHacia(este) })
+        
         //Reinicar el juego, durante la batalla
         keyboard.q().onPressDo({ if (!pantallas.inicio().hasVisual()) { self.reiniciarJuego() } })
         keyboard.j().onPressDo({
@@ -206,7 +207,7 @@ object juego {
         }
         
         if(self.enJuego()) {
-            game.onTick(1500, "moverEnemigos", { self.moverEnemigos() })
+            game.onTick(500, "moverEnemigos", { self.moverEnemigos() })
             game.onTick(4000, "atacarEnemigos", { self.atacarEnemigos() })
         }
         
@@ -241,7 +242,7 @@ object juego {
         jugador.restaurar()
         enemigos.clear()
         aranias = 1
-        orcos = 1
+        orcos = 2
         enemigosPorGenerar = aranias + orcos
         self.iniciarMenu()
     }
