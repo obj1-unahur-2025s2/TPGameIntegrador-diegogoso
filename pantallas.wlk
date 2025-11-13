@@ -39,7 +39,6 @@ class Visual {
     // Se agrega este método vacío para evitar el error 
     // "MessageNotUnderstoodException" cuando colisiona con el fondo.
   	}
-
 }
 
 class Fondo inherits Visual{}
@@ -49,9 +48,5 @@ class BarraDeVida inherits Visual{
 		img = unJugador.vida().toString() + "barradevida.png"
 		self.removerVisual()
 		self.agregarVisual()
-
-		
 	}
-
-	
 }
