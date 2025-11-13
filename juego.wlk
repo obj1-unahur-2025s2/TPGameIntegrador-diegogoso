@@ -78,7 +78,7 @@ object juego {
     method verificarPasoDeNivel() {
         const enemigosVivos = enemigos.filter({ e => e.estaVivo() })
         if (enemigosVivos.size() == 0) {
-            self.pasarDeNivel()
+            game.schedule(3000, {self.pasarDeNivel()})
         }
     }
 
@@ -87,7 +87,7 @@ object juego {
         game.removeVisual(jugador)
         pantallas.juego().removerVisual()
         pantallas.nivel2().agregarVisual()
-        game.schedule(4000, {
+         keyboard.enter().onPressDo{
             pantallas.nivel2().removerVisual()
             pantallas.juego().agregarVisual()
             pantallas.barraDeVida().agregarVisual()
@@ -98,7 +98,7 @@ object juego {
             game.addVisualCharacter(jefe)
             game.removeTickEvent("atacarEnemigos")
             game.onTick(2000, "atacarJefe", { self.atacarJefe() })
-        })
+        }
     }
 
     method limpiarVisualesFinales() {

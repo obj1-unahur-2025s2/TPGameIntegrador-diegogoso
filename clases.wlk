@@ -1,3 +1,4 @@
+import enemigos.*
 import wollok.game.*
 import direcciones.*
 import hechizos.*
@@ -42,7 +43,9 @@ class Jugador {
         vida = (vida - cantidad).max(0)
         pantallas.barraDeVida().actualizarse(self)
         if(!self.estaVivo()) {
-            juego.gameOver()
+            charcoDeSangre.dejarCharcoDeSangre(self.position())
+            game.schedule(3000, {juego.gameOver()})
+
         }
     } 
 

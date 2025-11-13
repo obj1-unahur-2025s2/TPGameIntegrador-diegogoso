@@ -2,8 +2,8 @@
 en jugador y enemigos*/
 
 //limites del tablero
-const limiteMaximo = 14
-const limiteMinimo = 1
+const limiteMaximo = 15
+const limiteMinimo = 0
 object norte {
   method nombre() = "norte"
   method mover(personaje) {

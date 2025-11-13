@@ -48,7 +48,7 @@ class Enemigo {
       self.sacarVida(hechizo.danio())
     }
   }
-
+  method mostrarDanio() 
   method vida() = vida
 
   method estaVivo() = vida > 0
@@ -59,12 +59,18 @@ class Arania inherits Enemigo {
   
   override method sacarVida(cantidad) {
     super(cantidad)
-    game.schedule(200, { self.image("araniaDanio.png") })
-    game.schedule(400, { self.image("arania.png") })
+    self.mostrarDanio()
     if (!self.estaVivo()) {
         juego.removerEnemigo(self)
+        charcoDeSangre.dejarCharcoDeSangre(self.position())
+       
       }  
   }
+  
+  override method mostrarDanio() {
+        game.schedule(200, { self.image("araniadanio.png") })
+    game.schedule(400, { self.image("arania.png") })
+}
 }
 
 class Orco inherits Enemigo {
@@ -72,11 +78,16 @@ class Orco inherits Enemigo {
 
 override method sacarVida(cantidad) {
   super(cantidad)
-  game.schedule(200, { self.image("orcoDanio.png") })
-  game.schedule(400, { self.image("orco.png") })
+  self.mostrarDanio()
   if (!self.estaVivo()) {
-    juego.removerEnemigo(self)
+        juego.removerEnemigo(self)
+        charcoDeSangre.dejarCharcoDeSangre(self.position())
+        
     }  
+  }
+  override method mostrarDanio() {
+    game.schedule(200, { self.image("orcoDanio.png") })
+    game.schedule(400, { self.image("orco.png") })
   }
 }
 
@@ -86,14 +97,29 @@ class Jefe inherits Enemigo {
 
   override method sacarVida(cantidad) {
     super(cantidad)
-    game.schedule(200, { self.image("jefedanio.png") })
-    game.schedule(400, { self.image("jefe.png") })
+    self.mostrarDanio()
     if (!self.estaVivo()) {
-      juego.removerEnemigo(self)
-      juego.finDelJuego()
+      game.removeVisual(self)
+      charcoDeSangre.dejarCharcoDeSangre(self.position())
+      game.schedule(2100, {juego.finDelJuego()})
     }
   }
   
   override method poder() = "bolaDeFuegoVerde.png"
+
+  override method mostrarDanio() {
+    game.schedule(200, { self.image("jefedanio.png") })
+    game.schedule(400, { self.image("jefe.png") })
+  }
 }
 
+object charcoDeSangre {
+  var property image = "charcoDeSangre.png"
+  var property position = game.at(0,0)
+  method dejarCharcoDeSangre(posicion) {
+    self.image("charcoDeSangre.png")
+    game.addVisual(self)
+    self.position(posicion)
+    game.schedule(2000, {game.removeVisual(self)})
+  }
+}
