@@ -15,14 +15,30 @@
 https://docs.google.com/presentation/d/1aUXR1Wd1IOLSuGrzuSM0re2AAUJssk1T/edit?usp=sharing&ouid=114910798792590590614&rtpof=true&sd=true
 
 ## 📸 Capturas
+
 ![Pantalla Inicio](assets/capturas/inicio.png)
+*Pantalla principal del juego.*
+
 ![Selección de Personajes](assets/capturas/seleccionPersonajes.png)
+*Menú de selección de personajes.*
+
 ![Pantalla Nivel 1](assets/capturas/nivel1.png)
+*El jugador en el Nivel 1.*
+
 ![Pantalla Transición a Nivel 2](assets/capturas/nivel2.png)
+*Pantalla de transición al siguiente nivel.*
+
 ![Pantalla Final](assets/capturas/nivelFinal.png)
+*Escena del nivel final.*
+
 ![Desarrolladores](assets/capturas/desarrolladores.png)
+*Créditos del equipo de desarrollo.*
+
 ![Pantalla Derrota](assets/capturas/derrota.png)
+*Pantalla de "Game Over" o derrota.*
+
 ![Pantalla Fin Del Juego](assets/capturas/finDelJuego.png)
+*Pantalla de victoria al completar el juego.*
 
 
 
