@@ -20,7 +20,6 @@ class Jugador {
         image = nombre + unaDireccion.nombre() + ".png"
     }
 
-    // VERIFICAR EL MOVIMIENTO QUE NO SALGA DE PANTALLA
     method restaurar() {
       vida = vidaInicial
     }
@@ -35,23 +34,19 @@ class Jugador {
 
     method vida() = vida
 
-    method vidaMaxima() = 5
-
-    method darVida() { vida = 5}
-
     method sacarVida(cantidad) {
         vida = (vida - cantidad).max(0)
         pantallas.barraDeVida().actualizarse(self)
         if(!self.estaVivo()) {
             charcoDeSangre.dejarCharcoDeSangre(self.position())
             game.schedule(3000, {juego.gameOver()})
-
         }
     } 
 
     method recibirAtaque(hechizo) {
         if (vida > 0 && hechizo.esMalvado()) {
             self.sacarVida(hechizo.danio())
+            hechizo.destruir()
         }
     }
 
@@ -74,6 +69,3 @@ class Barbaro inherits Jugador {
 class Mago inherits Jugador {
     override method poder() = "bolaDeFuego"
 }
-
-
-

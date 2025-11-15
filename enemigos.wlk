@@ -10,7 +10,6 @@ class Enemigo {
   var property image
   const poder = ""
   var ultimaDireccion = sur
-
   var pasosRestantes = 0
   var direccionActual = sur
 
@@ -20,27 +19,24 @@ class Enemigo {
 
   method ultimaDireccion() = ultimaDireccion
 
-method moverAleatoriamente() { 
-    const direccion = [norte, oeste, sur, este].randomized().first()
-    pasosRestantes = 2.randomUpTo(6) //genero la cantidad de pasos aleatorios, entre 1 y 6
-    direccionActual = direccion
-      if(pasosRestantes == 0 || ultimaDireccion.estaChocandoBorde(self)) {
-        direccion.randomized().first()
-        pasosRestantes = 2.randomUpTo(6) //genero la cantidad de pasos aleatorios, entre 1 y 8
-        direccionActual = direccion
-      } 
-    self.moverseHacia(direccionActual, pasosRestantes)
-  }
+  method moverAleatoriamente() { 
+    pasosRestantes = 2.randomUpTo(12) 
+    direccionActual = [norte, oeste, sur, este].randomized().first()
+    if(pasosRestantes == 0 || direccionActual.estaChocandoBorde(self)) {
+      direccionActual = [norte, oeste, sur, este].randomized().first()
+      pasosRestantes = 2.randomUpTo(12) 
+        } 
+        self.moverseHacia(direccionActual, pasosRestantes)
+    }
 
   method moverseHacia(direccion, pasos) {
-    if(pasos > 0){
-      direccion.mover(self)
-      pasosRestantes -= 1
+    if(pasosRestantes > 0){
+      direccionActual.mover(self)
+      pasosRestantes -= 1        
       ultimaDireccion = direccionActual
     }
   }
 
-  
   method posicionAleatoria() {
     const x = 2.randomUpTo(limiteMaximo)
     const y = 2.randomUpTo(limiteMaximo)
@@ -57,7 +53,9 @@ method moverAleatoriamente() {
       hechizo.destruir()
     }
   }
+
   method mostrarDanio() 
+
   method vida() = vida
 
   method estaVivo() = vida > 0
@@ -91,7 +89,6 @@ override method sacarVida(cantidad) {
   if (!self.estaVivo()) {
         juego.removerEnemigo(self)
         charcoDeSangre.dejarCharcoDeSangre(self.position())
-        
     }  
   }
   override method mostrarDanio() {
@@ -136,30 +133,6 @@ object charcoDeSangre {
     // Un hechizo no hace nada cuando choca con el fondo, no choca con ningun enemigo tampoco
     // Se agrega este método vacío para evitar el error 
     // "MessageNotUnderstoodException" cuando colisiona con el fondo.
+    otroHechizo.destruir() {}
   	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -208,15 +208,15 @@ object juego {
         }
         
         if(self.enJuego()) {
-            game.onTick(1500, "moverEnemigos", { self.moverEnemigos() })
-            game.onTick(4000, "atacarEnemigos", { self.atacarEnemigos() })
+            game.onTick(1000, "moverEnemigos", { self.moverEnemigos() })
+            game.onTick(3000, "atacarEnemigos", { self.atacarEnemigos() })
         }
         
     }
 
     method mostrarInstrucciones() {
         pantallas.instrucciones().agregarVisual()
-        game.schedule(6000, {
+        game.schedule(4000, {
             pantallas.instrucciones().removerVisual()
             self.iniciar()
         })
@@ -247,4 +247,5 @@ object juego {
         enemigosPorGenerar = aranias + orcos
         self.iniciarMenu()
     }
+
 }

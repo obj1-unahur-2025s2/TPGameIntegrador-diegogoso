@@ -12,9 +12,7 @@ object norte {
   method estaChocandoBorde(personaje) {
     return personaje.position().y() == limiteMaximo 
   }
-
 }
-
 
 object sur {
   method nombre() = "sur"
