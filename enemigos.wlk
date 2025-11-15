@@ -21,9 +21,9 @@ class Enemigo {
 
   method moverAleatoriamente() { 
     pasosRestantes = 2.randomUpTo(12) 
-    direccionActual = [norte, oeste, sur, este].randomized().first()
+    direccionActual = [norte2, oeste2, sur2, este2].randomized().first()
     if(pasosRestantes == 0 || direccionActual.estaChocandoBorde(self)) {
-      direccionActual = [norte, oeste, sur, este].randomized().first()
+      direccionActual = [norte2, oeste2, sur2, este2].randomized().first()
       pasosRestantes = 2.randomUpTo(12) 
         } 
         self.moverseHacia(direccionActual, pasosRestantes)
