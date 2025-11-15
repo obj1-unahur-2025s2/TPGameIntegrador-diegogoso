@@ -40,8 +40,6 @@ https://docs.google.com/presentation/d/1aUXR1Wd1IOLSuGrzuSM0re2AAUJssk1T/edit?us
 ![Pantalla Fin Del Juego](assets/capturas/finDelJuego.png)
 *Pantalla de victoria al completar el juego.*
 
-
-
 ## ⚔️ Reglas de Juego / Instrucciones
 
 ### 🎯 Objetivo
