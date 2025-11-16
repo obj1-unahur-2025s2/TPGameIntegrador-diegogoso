@@ -54,7 +54,9 @@ object juego {
     }
 
     method atacarEnemigos() {
-            enemigos.forEach({ enemigo =>
+        enemigos.randomize()
+        const enemigosParaAtacar = [enemigos.first()]
+            enemigosParaAtacar.forEach({ enemigo =>
             const ataque = new Hechizo(esMalvado = true, image = enemigo.poder())
             ataque.lanzar(enemigo)
             //game.onCollideDo(ataque, { objetivo => objetivo.recibirAtaque(ataque) })
