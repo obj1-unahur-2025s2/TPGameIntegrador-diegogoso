@@ -31,11 +31,11 @@ describe "RedWaterMystery - Tests de Jugabilidad" {
   }
 
   //  Hechizos
-  test "hechizo malvado usa imagen sin dirección" {
+  test "hechizo malvado usa imagen con dirección" {
     const hechizo = new Hechizo(esMalvado = true)
     const mago = new Mago(vida = 5, nombre = "mago", image = "magoeste.png")
     hechizo.lanzar(mago)
-    assert.equals(hechizo.image(), "bolaDeFuego")
+    assert.equals(hechizo.image(), "bolaDeFuegoeste.png")
   }
 
   test "hechizo bueno usa imagen con dirección" {
