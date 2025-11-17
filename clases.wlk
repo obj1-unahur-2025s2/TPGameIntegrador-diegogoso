@@ -6,7 +6,7 @@ import juego.*
 
 class Personaje {
         var property image
-        var property position = game.center()
+        var property position = self.posicionAleatoria()
         var vida = 5
         const vidaInicial = 5
 
@@ -26,6 +26,12 @@ class Personaje {
 
         method recibirAtaque(hechizo) {
                 // comportamiento por defecto: no hace nada
+        }
+
+        method posicionAleatoria() {
+            const x = 2.randomUpTo(limiteMaximo)
+            const y = 2.randomUpTo(limiteMaximo)
+            return game.at(x, y)
         }
 }
 
@@ -66,6 +72,10 @@ class Jugador inherits Personaje {
             hechizo.destruir()
         }
     }
+
+    override method posicionAleatoria() {
+            return game.center()
+        }
 }
 
 class Guerrero inherits Jugador { 
@@ -115,12 +125,6 @@ class Enemigo inherits Personaje {
             pasosRestantes -= 1        
             ultimaDireccion = direccionActual
         }
-    }
-
-    method posicionAleatoria() {
-        const x = 2.randomUpTo(limiteMaximo)
-        const y = 2.randomUpTo(limiteMaximo)
-        return game.at(x, y)
     }
 
     // Enemigo usa la implementación por defecto de sacarVida de Personaje

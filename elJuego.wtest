@@ -2,7 +2,6 @@ import clases.*
 import hechizos.*
 import direcciones.*
 import juego.*
-import enemigos.*
 import personajes.*
 import wollok.game.*
 import pantallas.*
