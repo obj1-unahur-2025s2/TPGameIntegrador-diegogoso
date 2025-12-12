@@ -52,9 +52,11 @@ class Jugador inherits Personaje {
     }
 
     method moverseHacia(direccion) {
-        self.alternarImagen(direccion)
-        direccion.mover(self)
-        direccionActual = direccion
+        if (self.estaVivo()) {
+            self.alternarImagen(direccion)
+            direccion.mover(self)
+            direccionActual = direccion
+        }
     }
 
     method ultimaDireccion() = direccionActual
@@ -241,5 +243,44 @@ object charcoDeSangre {
         // Se agrega este método vacío para evitar el error 
         // "MessageNotUnderstoodException" cuando colisiona con el fondo.
         otroHechizo.destruir() {}
+    }
+}
+
+// Luz mágica para la animación de aparición del anciano
+object luzMagica {
+    var property image = "luzMagica.gif"
+    var property position = game.at(0, 0)
+
+    method mostrar(posicion) {
+        self.position(posicion)
+        self.image("luzMagica.gif")
+        game.addVisual(self)
+    }
+
+    method desaparecer() {
+        game.removeVisual(self)
+    }
+}
+
+// Anciano mago que aparece con mensaje de ayuda
+object ancianoMago {
+    var property image = "ancianoMago.png"
+    var property position = game.at(0, 0)
+
+    method mostrar(posicion) {
+        self.position(posicion)
+        self.image("ancianoMago.png")
+        game.addVisual(self)
+    }
+
+    method desaparecer() {
+        if (game.hasVisual(self)) {
+            game.removeVisual(self)
+        }
+    }
+
+    method mostrarIntroduccion() {
+        // Mostrar diálogo con say()
+        game.say(self, "¡Los monstruos atacan nuestras tierras! ¡Debes ayudarnos!")
     }
 }

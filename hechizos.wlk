@@ -16,12 +16,20 @@ class Hechizo {
       self.moverHechizo(personaje.ultimaDireccion())
     }
 
+  // Permite lanzar un hechizo fijando explícitamente la dirección (útil para enemigos)
+  method lanzarEnDireccion(personaje, direccion) {
+      image = personaje.imagenDePoder()
+      position = personaje.position()
+      game.addVisual(self)
+      self.moverHechizo(direccion)
+  }
+
   method moverHechizo(direccion){
-    game.onTick(200, self, { 
+    game.onTick(400, self, { 
         self.moverseHacia(direccion)
         pasos -= 1
         if (pasos <= 0) {
-            self.destruir() // Llama al nuevo método destruir
+            self.destruir()
         }
     })
   }

@@ -46,16 +46,41 @@ object juego {
             self.generarOrco()
             enemigosPorGenerar = (enemigosPorGenerar - 1).max(0)
         }
+        // Remover tick cuando no hay más enemigos por generar
+        if (enemigosPorGenerar == 0) {
+            game.removeTickEvent("generarEnemigo")
+        }
     }
 
     method moverEnemigos() {
-        enemigos.copy().forEach({ enemigo => enemigo.moverAleatoriamente() })
+        enemigos.forEach({ enemigo => if (enemigo.estaVivo()) { enemigo.moverAleatoriamente() } })
     }
 
     method atacarEnemigos() {
         enemigos.forEach({ enemigo =>
+            if (!enemigo.estaVivo()) { return }
+            // calcular dirección hacia el jugador y lanzar en esa dirección
+            const jugadorObj = jugador
             const ataque = new Hechizo(esMalvado = true, image = enemigo.poder())
-            ataque.lanzar(enemigo)
+            if (jugadorObj != null) {
+                const posJ = jugadorObj.position()
+                const posE = enemigo.position()
+                const dx = posJ.x() - posE.x()
+                const dy = posJ.y() - posE.y()
+                var absDx = dx
+                if (absDx < 0) { absDx = -absDx }
+                var absDy = dy
+                if (absDy < 0) { absDy = -absDy }
+                var direccion = este2
+                if (absDx > absDy) {
+                    if (dx > 0) { direccion = este2 } else { direccion = oeste2 }
+                } else {
+                    if (dy > 0) { direccion = norte2 } else { direccion = sur2 }
+                }
+                ataque.lanzarEnDireccion(enemigo, direccion)
+            } else {
+                ataque.lanzar(enemigo)
+            }
             game.onCollideDo(ataque, { victima => victima.recibirAtaque(ataque) })
         })
     }
@@ -63,7 +88,26 @@ object juego {
     method atacarJefe() {
         if (jefe.estaVivo()) {
             const bolaDeFuegoVerde = new BolaDeFuegoVerde(esMalvado = true, image = jefe.poder())
-            bolaDeFuegoVerde.lanzar(jefe)
+            const jugadorObj = jugador
+            if (jugadorObj != null) {
+                const posJ = jugadorObj.position()
+                const posE = jefe.position()
+                const dx = posJ.x() - posE.x()
+                const dy = posJ.y() - posE.y()
+                var absDx = dx
+                if (absDx < 0) { absDx = -absDx }
+                var absDy = dy
+                if (absDy < 0) { absDy = -absDy }
+                var direccion = este2
+                if (absDx > absDy) {
+                    if (dx > 0) { direccion = este2 } else { direccion = oeste2 }
+                } else {
+                    if (dy > 0) { direccion = norte2 } else { direccion = sur2 }
+                }
+                bolaDeFuegoVerde.lanzarEnDireccion(jefe, direccion)
+            } else {
+                bolaDeFuegoVerde.lanzar(jefe)
+            }
             game.onCollideDo(bolaDeFuegoVerde, { victima => victima.recibirAtaque(bolaDeFuegoVerde) })
         }
     }
@@ -77,6 +121,8 @@ object juego {
     method verificarPasoDeNivel() {
         const enemigosVivos = enemigos.filter({ e => e.estaVivo() })
         if (enemigosVivos.size() == 0) {
+            game.removeTickEvent("moverEnemigos")
+            game.removeTickEvent("atacarEnemigos")
             game.schedule(3000, {self.pasarDeNivel()})
         }
     }
@@ -91,12 +137,14 @@ object juego {
             pantallas.juego().agregarVisual()
             pantallas.barraDeVida().agregarVisual()
             game.addVisualCharacter(jugador)
-            jugador.darVida()
+            jugador.restaurar()
+            pantallas.barraDeVida().actualizarse(jugador)
             enemigos.clear()
             enemigos.add(jefe)
             game.addVisualCharacter(jefe)
             game.removeTickEvent("atacarEnemigos")
-            game.onTick(2000, "atacarJefe", { self.atacarJefe() })
+            game.onTick(2500, "moverJefe", { jefe.moverAleatoriamente() })
+            game.onTick(3500, "atacarJefe", { self.atacarJefe() })
         }
     }
 
@@ -110,20 +158,53 @@ object juego {
         game.removeTickEvent("generarEnemigo")
         game.removeTickEvent("moverEnemigos")
         game.removeTickEvent("atacarEnemigos")
+        game.removeTickEvent("moverJefe")
+        game.removeTickEvent("atacarJefe")
     }
 
     method finDelJuego() {
         if (!jefe.estaVivo()) {
             self.detenerEventos()
             pantallas.nivel2().removerVisual()
-            self.limpiarVisualesFinales()
-            pantallas.victoria().agregarVisual()
-            game.schedule(4000, {
-                pantallas.victoria().removerVisual()
-                pantallas.creditos().agregarVisual()
-                game.schedule(4000, {
-                    pantallas.creditos().removerVisual()
-                    self.reiniciarJuego()
+            
+            // Mostrar anciano mago con mensaje de agradecimiento
+            const posIntroduccion = game.at(7, 9)
+            luzMagica.mostrar(posIntroduccion)
+            game.schedule(800, { 
+                luzMagica.desaparecer()
+                ancianoMago.mostrar(posIntroduccion)
+                game.say(ancianoMago, "¡Gracias por salvar a nuestro mundo!")
+                
+                // Esperar 6 segundos para que se lea el mensaje
+                game.schedule(6000, {
+                    ancianoMago.desaparecer()
+                    luzMagica.mostrar(posIntroduccion)
+                    
+                    game.schedule(800, {
+                        luzMagica.desaparecer()
+                        
+                        // Pausa de 1 segundo antes de mostrar victoria
+                        game.schedule(1000, {
+                            self.limpiarVisualesFinales()
+                            pantallas.victoria().agregarVisual()
+                            
+                            // Esperar 7 segundos en pantalla victoria
+                            game.schedule(7000, {
+                                pantallas.victoria().removerVisual()
+                                
+                                // Pausa de 1 segundo antes de mostrar créditos
+                                game.schedule(1000, {
+                                    pantallas.creditos().agregarVisual()
+                                    
+                                    // Esperar 7 segundos en créditos antes de reiniciar
+                                    game.schedule(7000, {
+                                        pantallas.creditos().removerVisual()
+                                        self.reiniciarJuego()
+                                    })
+                                })
+                            })
+                        })
+                    })
                 })
             })
         }
@@ -174,6 +255,28 @@ object juego {
         })
     }
 
+    method mostrarIntroduccion() {
+        // Posición centro pero un poco más arriba en el tablero
+        const posIntroduccion = game.at(7, 9)
+        
+        // T=0: Mostrar luz mágica inicial
+        luzMagica.mostrar(posIntroduccion)
+        
+        // T=800ms: Luz desaparece y aparece anciano
+        game.schedule(800, { luzMagica.desaparecer() })
+        game.schedule(850, { 
+            ancianoMago.mostrar(posIntroduccion)
+            ancianoMago.mostrarIntroduccion()
+        })
+        
+        // T=9350ms: Anciano desaparece y aparece luz (5 segundos más)
+        game.schedule(9350, { ancianoMago.desaparecer() })
+        game.schedule(9400, { luzMagica.mostrar(posIntroduccion) })
+        
+        // T=10150ms: Luz desaparece completamente
+        game.schedule(10150, { luzMagica.desaparecer() })
+    }
+
     method iniciar() {
         game.clear()
         enJuego = true
@@ -183,6 +286,9 @@ object juego {
         pantallas.barraDeVida().agregarVisual()
         game.addVisualCharacter(jugador)
         pantallas.barraDeVida().actualizarse(jugador)
+        
+        // Mostrar introducción del anciano mago
+        self.mostrarIntroduccion()
        
         keyboard.w().onPressDo({ jugador.moverseHacia(norte) })
         keyboard.s().onPressDo({ jugador.moverseHacia(sur) })
@@ -202,12 +308,13 @@ object juego {
         })
 
         if (enemigosPorGenerar > 0) {
-            game.onTick(1000, "generarEnemigo", { self.generarEnemigo() })
+            game.onTick(2000, "generarEnemigo", { self.generarEnemigo() })
         }
         
-        if(self.enJuego()) {
-            game.onTick(1500, "moverEnemigos", { self.moverEnemigos() })
-            game.onTick(3000, "atacarEnemigos", { self.atacarEnemigos() })
+        // Sólo programar ticks de enemigos si hay enemigos por generar o ya hay enemigos
+        if(self.enJuego() and (enemigosPorGenerar > 0 or enemigos.size() > 0)) {
+            game.onTick(2500, "moverEnemigos", { self.moverEnemigos() })
+            game.onTick(5000, "atacarEnemigos", { self.atacarEnemigos() })
         }
         
     }

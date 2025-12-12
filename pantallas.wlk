@@ -14,7 +14,7 @@ object pantallas {
 
 class Visual {
     var property position = game.at(0,0)
-    var img = ""
+    var property img = ""
 
     method image() = img
     
@@ -47,7 +47,5 @@ class Fondo inherits Visual{}
 class BarraDeVida inherits Visual{
 	method actualizarse(unJugador) {
 		img = unJugador.vida().toString() + "barradevida.png"
-		self.removerVisual()
-		self.agregarVisual()
 	}
 }
