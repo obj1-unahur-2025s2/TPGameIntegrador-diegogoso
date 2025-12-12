@@ -10,10 +10,6 @@
 * Darío Robles
 * Florencia Saharrea
 
-## PRESENTACION EN POWERPOINT:
-
-https://docs.google.com/presentation/d/1aUXR1Wd1IOLSuGrzuSM0re2AAUJssk1T/edit?usp=sharing&ouid=114910798792590590614&rtpof=true&sd=true
-
 ## 📸 Capturas de Pantalla
 
 ### 🏠 Pantalla de Inicio
@@ -72,17 +68,17 @@ El camino a la victoria se divide en varias etapas:
 
 **Pantalla de Inicio:** El juego te da la bienvenida.
 **Selección de Héroe:** Elige tu estilo de combate, seleccionando a uno de los cuatro héroes:
-    * 🪓 Guerrero
+    * 🛡️ Guerrero
     * 🏹 Arquero
-    * 🛡️ Bárbaro
+    * 🪓 Bárbaro
     * 🪄 Mago
-**Nivel 1 - La Horda:** Tu aventura comienza. Deberás sobrevivir en un mapa infestado de **Arañas y Orcos** que te atacarán sin tregua. ¡Elimínalos a todos!
+**Nivel 1 - La Horda:** Tu aventura comienza. Deberás sobrevivir en un mapa infestado de **Arañas y Orcos**. ¡Elimínalos a todos!
 **Nivel 2 - El Jefe:** Una vez que hayas limpiado el mapa de enemigos menores, serás transportado al desafío final. Aquí te enfrentarás al **Jefe** y sus ataques devastadores.
 **Victoria o Derrota:** Si logras vencer al Jefe, habrás ganado el juego. Si tu vida llega a cero en cualquier momento, la derrota manchará tu honor y la partida terminará.
 
 ### 🎮 Controles
-* **Movimientos (w,a,s,d):** Mover a tu personaje por el mapa.
-* **Tecla J:** Lanzar el hechizo especial de tu héroe.
+* **Movimientos (W,A,S,D):** Mover a tu personaje por el mapa (arriba, izquierda, abajo, derecha).
+* **Tecla J:** Atacar/Lanzar Hechizo (en la última dirección de movimiento).
 
 ### 💥Mecánicas Principales
 * **Sistema de Vida:** Comienzas tu aventura con 5 puntos de vida.
@@ -92,6 +88,22 @@ El camino a la victoria se divide en varias etapas:
     * Si tu hechizo impacta a un enemigo, este perderá vida.
 * **Game Over:** Si tu vida llega a 0, la partida termina. El juego mostrará la pantalla de "Game Over" y se reiniciará tras unos segundos.
 * **Condición de Victoria:** Para ganar el juego, debes **derrotar al Jefe** del Nivel 2.
+
+
+## 💻 Conceptos de POO en Wollok
+Este proyecto fue desarrollado en Wollok 4.0.0, implementando la arquitectura del juego bajo los principios de Programación Orientada a Objetos (POO):
+
+🔰 Jerarquía de Clases y Herencia
+Se define una clase base (Unidad) o un Trait para establecer comportamientos comunes (como moverse, recibir daño) que luego son heredados y refinados por clases específicas como Personaje, Enemigo y Proyectil.
+
+🔄 Polimorfismo
+El método de ataque (atacar()) o de comportamiento del enemigo (comportamiento()) es polimórfico. Esto permite que cada unidad (Bárbaro, Arquero, Araña, Jefe) implemente su propia lógica específica de combate (ej: tipo de proyectil, velocidad, área de efecto) mientras todas responden a la misma llamada de mensaje.
+
+🔒 Encapsulamiento
+Los atributos críticos de las unidades, como la vida y el daño, se mantienen encapsulados, asegurando que solo puedan ser accedidos y modificados de manera controlada a través de métodos definidos (ej: recibirDaño(cantidad)).
+
+🤝 Colaboración entre Objetos
+El diseño se basa en Objetos que Colaboran. El objeto principal Juego (o Mapa) es responsable de gestionar la interacción y las colisiones entre otros objetos clave: los Personajes, los Enemigos y los Proyectiles, logrando así la dinámica completa del juego.
 
 ## ℹ️ Otros
 
