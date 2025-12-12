@@ -45,7 +45,11 @@ class Jugador inherits Personaje {
         image = nombre + unaDireccion.nombre() + ".png"
     }
 
-    override method restaurar() { vida = vidaInicial }
+    override method restaurar() { 
+        vida = vidaInicial
+        // restaurar la imagen del jugador según su dirección
+        self.alternarImagen(self.ultimaDireccion())
+    }
 
     method moverseHacia(direccion) {
         self.alternarImagen(direccion)
@@ -61,7 +65,8 @@ class Jugador inherits Personaje {
         super(cantidad)
         pantallas.barraDeVida().actualizarse(self)
         if(!self.estaVivo()) {
-            charcoDeSangre.dejarCharcoDeSangre(self.position())
+            // reemplazar la imagen del jugador por el charco de sangre
+            self.image("charcoDeSangre.png")
             game.schedule(3000, {juego.gameOver()})
         }
     }
@@ -110,13 +115,41 @@ class Enemigo inherits Personaje {
     method ultimaDireccion() = ultimaDireccion
 
     method moverAleatoriamente() { 
-        pasosRestantes = 2.randomUpTo(12) 
-        direccionActual = [norte2, oeste2, sur2, este2].randomized().first()
+        // Persigue al jugador: elige una dirección que reduzca la distancia al jugador
+        const jugador = juego.jugador()
+        if (jugador == null) {
+            // si no hay jugador definido, fallback al comportamiento aleatorio
+            pasosRestantes = 2.randomUpTo(12)
+            direccionActual = [norte2, oeste2, sur2, este2].randomized().first()
+            if(pasosRestantes == 0 || direccionActual.estaChocandoBorde(self)) {
+                direccionActual = [norte2, oeste2, sur2, este2].randomized().first()
+                pasosRestantes = 2.randomUpTo(12)
+            }
+            self.moverseHacia(direccionActual, pasosRestantes)
+        } else {
+            const posJ = jugador.position()
+            const posE = self.position()
+            const dx = posJ.x() - posE.x()
+            const dy = posJ.y() - posE.y()
+
+        // preferir mover en el eje con mayor diferencia, pero si ambos existen
+        var opciones = []
+        if (dx > 0) { opciones.add(este2) } else if (dx < 0) { opciones.add(oeste2) }
+        if (dy > 0) { opciones.add(norte2) } else if (dy < 0) { opciones.add(sur2) }
+
+        // si ya están en la misma celda, moverse aleatoriamente
+        if (opciones.size() == 0) {
+            opciones = [norte2, oeste2, sur2, este2]
+        }
+
+        pasosRestantes = 1.randomUpTo(4)
+        direccionActual = opciones.randomized().first()
         if(pasosRestantes == 0 || direccionActual.estaChocandoBorde(self)) {
             direccionActual = [norte2, oeste2, sur2, este2].randomized().first()
-            pasosRestantes = 2.randomUpTo(12) 
-        } 
-        self.moverseHacia(direccionActual, pasosRestantes)
+            pasosRestantes = 2.randomUpTo(12)
+        }
+            self.moverseHacia(direccionActual, pasosRestantes)
+        }
     }
 
     method moverseHacia(direccion, pasos) {
