@@ -35,9 +35,13 @@ class Hechizo {
   }
 
   method destruir() {
-    game.removeTickEvent(self) // Detiene este tick en particular
-    game.removeVisual(self) // Borra la visual
-    estaVivo = false
+    if (estaVivo) {
+      game.removeTickEvent(self) // Detiene este tick en particular
+      if (game.hasVisual(self)) {
+        game.removeVisual(self) // Borra la visual
+      }
+      estaVivo = false
+    }
   }
 
   method danio() = 1
